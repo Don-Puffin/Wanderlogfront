@@ -7,26 +7,6 @@ export default class ApiClient {
         this.logoutHandler = logoutHandler;
       }
     
-    //   authenticatedCall(method, url, data) {
-    //     const userCookie = document.cookie
-    //     const token = getToken(userCookie)
-    //     return axios({
-    //       method,
-    //       url,
-    //       headers: {
-    //         authorization: token,
-    //       },
-    //       data,
-    //     }).catch((error) => {
-    //       if (error.response.status === 403) {
-    //         this.logoutHandler();
-    //         return Promise.reject();
-    //       } else {
-    //         throw error;
-    //       }
-    //     });
-    //   }
-
     //other backend calls go here
 
     //get token
@@ -53,43 +33,29 @@ export default class ApiClient {
               username: username,
               password: password,
             },
+        })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data.status === 200) {
+    //         window.location.href = "/feed"; //redirect to feed if login successful
+    //     } else {
+    //         window.location.href = "/login"; //redirect back to login if login unsuccessful
+    //         alert(data.message); //TODO replace with toast
+    //     }
+    // })
+    // .catch(error => console.error('Error logging in:', error));
+    // }
+    .then(response => {
+      console.log(response.data);
+      return response.data; // return response data containing status and message
     })
-    .then(response => response.json())
-    .then(data => {
-    // Set token as a cookie
-        if (data.status === 200) {
-            window.location.href = "/feed";
-        } else {
-            window.location.href = "/login";
-            alert(data.message);
-        }
-    // Redirect or perform any other actions after successful login
-    })
-    .catch(error => console.error('Error logging in:', error));
-    }
-}
-    // Make authenticated request
-//     // authenticatedRequest(page) {
-//     //         fetch(page,{
-//     //         method: 'GET',
-//     //         headers: {
-//     //         'Content-Type': 'application/json',
-//     //         'Authorization': `Bearer ${getCookie('token')}`
-//     //         }
-//     //     })
-//     //     .then(response => response.json())
-//     //     .then(data => {
-//     //         console.log(data);
-//     //         console.log("success")
-//     //     })
-//     //     .catch(error => console.error('Error making authenticated request:', error));
-//     // }
-//   // Function to get a specific cookie value by name
-//     getCookie(name) {
-//         const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-//         return cookieValue ? cookieValue.pop() : '';
-//     }
+    .catch(error => {
+      throw error; // re-throw the error to be caught by the caller
+    });
+  }
 
+
+}
 
 
 
