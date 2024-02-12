@@ -2,4 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
 
+}
+
+#earth {
+    width:50vw;
+    height:50vw;
+        max-width: 900px;
+        max-height: 900px;
+        background: url(/map_with_pins_2.jpg);
+        border-radius: 50%;
+        background-size: 1830px;
+        box-shadow: inset 8px 20px 70px 36px rgb(0, 0, 0),  inset -6px 0 12px 4px rgba(255, 255, 255, 0.3),
+        0 0 30px 1px rgba(0, 0, 255, 0.5);
+        animation-name: rotate;
+        animation-duration: 48s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        -webkit-animation-name: rotate;
+           -webkit-animation-duration: 48s;
+           -webkit-animation-iteration-count: infinite;
+           -webkit-animation-timing-function: linear; 
+      }
+      @keyframes rotate {
+        from {
+          background-position: 0px 0px;
+        }
+        to {
+          background-position: 1830px 0px;
+        }
+      }
+      @-webkit-keyframes rotate {
+        from {
+          background-position: 0px 0px;
+        }
+        to {
+          background-position: 1830px 0px;
+        }
+      }
