@@ -6,7 +6,7 @@ import React from 'react';
 // console.log(share)
 const Post = (props) => {
   return (
-    <div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-16 bg-white shadow-xl rounded-lg text-gray-900">
+    <div className="w-72 mt-10  bg-white shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-32 overflow-hidden">
         <img className="object-cover object-top w-full" src='https://www.researchgate.net/publication/362488268/figure/fig1/AS:11431281079780306@1660873730064/Map-of-Ardeche-within-France-Image-source-Google-Maps-2021.png' alt='Mountain' />
       </div>
