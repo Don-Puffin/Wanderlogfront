@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
+body {
 background-color: black;
-} */
+}
 
 #earth {
     width:50vw;
