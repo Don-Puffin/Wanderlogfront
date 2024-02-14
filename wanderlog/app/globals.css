@@ -3,19 +3,20 @@
 @tailwind utilities;
 
 body {
-background-color: black;
+ background-color: black;
 }
 
 #earth {
     width:50vw;
     height:50vw;
-        max-width: 855px;
+    aspect-ratio: 1 / 1;
+    max-width: 855px;
         max-height: 855px;
         background: url(/map_with_pins_2.jpg);
         border-radius: 50%;
         background-size: 1738.5px;
         box-shadow: inset 8px 20px 70px 36px rgb(0, 0, 0),  inset -6px 0 12px 4px rgba(255, 255, 255, 0.3),
-        0 0 30px 1px rgba(0, 0, 255, 0.5);
+        0 0 30px 1px rgba(35, 6, 199, 0.5);
         animation-name: rotate;
         animation-duration: 48s;
         animation-iteration-count: infinite;
