@@ -16,7 +16,8 @@ const page = () => {
   const refreshList = () => {
     console.log("refreshing")
     client.getAllPosts().then(response => {
-      setPosts(response.data)
+      console.log(response)
+      setPosts(response.posts)
     })
   }
 
@@ -36,14 +37,14 @@ const page = () => {
           <Post name={post.username} location={post.postLocation} info={post.postText}/>
         )
         )}
-        <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
+        {/* <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
         <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
         <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
         <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/> 
         <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
         <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
         <Post name="Username" location="Paris - France" info="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed eleifend ipsum, sed placerat quam."/>
-   
+    */}
         </div>
     </div>
   )

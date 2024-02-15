@@ -1,6 +1,6 @@
 import axios from "axios";
-const url = "https://wanderlogback.onrender.com";
-// const url = "http://localhost:3001";
+//const url = "https://wanderlogback.onrender.com";
+const url = "http://localhost:3001";
 
 export default class ApiClient {
      constructor(tokenProvider, logoutHandler) {
@@ -11,8 +11,8 @@ export default class ApiClient {
     //logout
 
     // Perform login request
-    getLogin(username, password) {
-        return axios({
+    async getLogin(username, password) {
+        return await axios({
             method: "POST", // Use the appropriate HTTP method
             url: `${url}/auth/login`,
             headers: {
@@ -22,6 +22,7 @@ export default class ApiClient {
               username: username,
               password: password,
             },
+            withCredentials: true
         })
     .then(response => {
       console.log(response.data);
@@ -32,8 +33,8 @@ export default class ApiClient {
     });
   }
 
-  register(username, password) {
-    return axios({
+  async register(username, password) {
+    return await axios({
       method: "POST", // Use the appropriate HTTP method
       url: `${url}/auth/register`,
       headers: {
@@ -43,6 +44,7 @@ export default class ApiClient {
         username: username,
         password: password,
       },
+      withCredentials: true
     })
   .then(response => {
     console.log(response.data);
@@ -54,13 +56,14 @@ export default class ApiClient {
 }
 
 
-  getAllPosts() {
-    return axios({
+  async getAllPosts() {
+    return await axios({
       method: "GET", // Use the appropriate HTTP method
       url: `${url}/post/posts`,
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      withCredentials: true
     })
     .then(response => {
       console.log(response.data);
@@ -71,13 +74,14 @@ export default class ApiClient {
     });
   }
 
-  getUserPosts() {
-    return axios({
+  async getUserPosts() {
+    return await axios({
       method: "GET", // Use the appropriate HTTP method
       url: `${url}/post/userPosts`,
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      withCredentials: true
     })
     .then(response => {
       console.log(response.data);
@@ -89,8 +93,8 @@ export default class ApiClient {
   
   }
 
-  createPost(postText, postLocation, postImage) {
-    return axios({
+  async createPost(postText, postLocation, postImage) {
+    return await axios({
       method: "POST", // Use the appropriate HTTP method
       url: `${url}/post/create`,
       headers: {
@@ -101,6 +105,7 @@ export default class ApiClient {
         postLocation: postLocation,
         postImage: postImage,
       },
+      withCredentials: true
     })
     .then(response => {
       console.log(response.data);
@@ -111,8 +116,8 @@ export default class ApiClient {
     });
   }
 
-  updatePost(id, postText, postLocation, postImage){
-    return axios({
+  async updatePost(id, postText, postLocation, postImage){
+    return await axios({
       method: "POST", // Use the appropriate HTTP method
       url: `${url}/post/update/${id}`,
       headers: {
@@ -123,6 +128,7 @@ export default class ApiClient {
         postLocation: postLocation,
         postImage: postImage,
       },
+      withCredentials: true
     })
     .then(response => {
       console.log(response.data);
@@ -133,13 +139,14 @@ export default class ApiClient {
     });
   }
 
-  deletePost(id) {
-    return axios({
+  async deletePost(id) {
+    return await axios({
       method: "POST", // Use the appropriate HTTP method
       url: `${url}/post/delete/${id}`,
       headers: {
         "Content-Type": "application/json",
-      }
+      },
+      withCredentials: true
     })
     .then(response => {
       console.log(response.data);
