@@ -12,7 +12,8 @@ import Link from 'next/link';
 
 const page = () => {
   return (
-<body className ="bg-black h-screen">
+<body className ="h-screen">
+  <div id="blackback" className="h-screen">
 <div >
 
 
@@ -61,6 +62,7 @@ const page = () => {
         
 
         </div>
+      </div>
       </div>
         </body>    
   )

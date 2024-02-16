@@ -55,6 +55,40 @@ export default class ApiClient {
   });
 }
 
+async logout() {
+  console.log("apiclient function activate")
+  return await axios({
+    method: "POST", // Use the appropriate HTTP method
+    url: `${url}/auth/logout`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true
+  }).then(response => {
+    console.log(response.data);
+    return response.data;
+  }).catch(error => {
+    throw error;
+  })
+}
+
+
+async authUser () {
+  console.log("checking for cookies")
+  return await axios({
+    method: "POST", 
+    url: `${url}/auth/auth`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    withCredentials: true
+  }).then(response => {
+    return response.data;
+  }).catch(error => {
+    throw error;
+  })
+}
+
 
   async getAllPosts() {
     return await axios({
@@ -156,6 +190,49 @@ export default class ApiClient {
     throw error; // re-throw the error to be caught by the caller
     });
   }
+
+  async getUserProfile() {
+    return await axios({
+      method: "GET", // Use the appropriate HTTP method
+      url: `${url}/profile/profile`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data; // return response data
+    })
+    .catch(error => {
+      throw error; // re-throw the error to be caught by the caller
+    });
+  
+  }
+
+  async editUserProfile(imageURL, bio, userLocation) {
+    return await axios ({
+      method: "PUT",
+      url: `${url}/profile/edit`,
+      headers: {
+        "Content-Type": "application/json",
+      }, 
+      data: {
+        imageURL: imageURL,
+        bio: bio,
+        userLocation: userLocation
+      },
+      withCredentials: true
+    }).then(response => {
+      console.log(response.data);
+      return response.data
+    }).catch(error => {
+      throw error;
+    })
+  }
+
+
+  
 }
 
 

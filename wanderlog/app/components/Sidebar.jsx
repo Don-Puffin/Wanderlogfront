@@ -9,18 +9,38 @@ import { FaStar } from "react-icons/fa";
 import { GiPowerButton } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import  ApiClient from "@/utils/ApiClient";
+import { useRouter } from "next/navigation";
 
-const SideBar = () => {
+
+  const SideBar = () => {
+  const client = new ApiClient();
   const pathname = usePathname();
+  const router = useRouter();
+
 
   useEffect(() => {
     console.log("pathname");
     console.log(pathname)
   }, [pathname]);
 
+
+    
+  
+  const handleLogout = async () => {
+    client.logout()
+    .then(() => {
+      router.push('/')
+    })
+    .catch((error) => {
+      console.log('Error logging out:', error);
+    });
+  };
+  
+
   return (
     <>
-      <div className="sticky  top-0 w-4/6 h-screen bg-gray-100  ml-0 shadow-xl rounded-lg text-gray-900">
+      <div className="sticky top-0 w-4/6 bg-gray-100  ml-0 shadow-xl rounded-lg text-gray-900">
 <div className =" flex flex-col  ">
 <img className="h-auto w-3/4 ml-4 mt-4 p-2 transition-transform hover:scale-110" src= "wanderloglogobw.png" alt="wanderlog logo"/>
       
@@ -51,11 +71,11 @@ const SideBar = () => {
         <FaStar size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms' }}/>
         <div className="m-2 my-auto"> Top Rated</div>
     </Link>
-    <div className=" mt-80 flex text-xl text-gray-900 mb-5 p-4 rounded-xl hover:bg-gray-200">
+    <button onClick={handleLogout} className="bottom flex text-xl text-gray-900 mb-5 p-4 rounded-xl hover:bg-gray-200 cursor-pointer">
 <GiPowerButton size={30} className="transition-transform hover:scale-110" 
     style={{ transitionDuration: '300ms' }}/>
-    <div className="m-2 my-auto text-md"> Logout</div>
-    </div>
+    <div className="m-2 my-auto text-md cursor-pointer" > Logout</div>
+    </button>
     </div>
     </div>
     </>
