@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar"
 import ApiClient  from '@/utils/ApiClient';
 import { useRouter } from 'next/navigation';
+import GoogleMap from '@/app/components/Map';
 // import { CldUploadWidget } from 'next-cloudinary';
 
 import axios from 'axios';
@@ -93,6 +94,7 @@ const router = useRouter();
     <div className="flex flex-cols-2">
     <div className="sticky top-0 w-1/3  bg-white">
         <SideBar />
+        <GoogleMap />
         </div>
 
         <div className="h-full w-screen bg-white">
@@ -181,7 +183,7 @@ const router = useRouter();
     );
   }}
 </CldUploadWidget> */}
-        
+      
       </div>
     </div>
         
