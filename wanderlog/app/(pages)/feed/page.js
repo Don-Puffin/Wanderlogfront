@@ -6,6 +6,8 @@ import SideBar from "../../components/SideBar";
 import ApiClient from '@/utils/ApiClient';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import ProfileGoogleMap from '../../components/ProfileGoogleMap';
+
 
 
 const Page = () => {
@@ -78,7 +80,7 @@ const Page = () => {
       {posts.length > 0 && (
         <div className="grid grid-cols-3 gap-10 h-full w-screen bg-white">
           {posts.map((post) => (
-            <Post key={post.id} name={post.username} location={post.postLocation} info={post.postText} />
+            <Post key={post.id} name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} />
           ))}
         </div>
       )}
