@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import ApiClient from '@/utils/ApiClient';
+import PostGoogleMap from './postGoogleMap.jsx';
 // import share from "./share.png";
 
 
@@ -25,12 +26,13 @@ const Post = (props) => {
 
 
   return (
-    <div className="w-72 mt-10  bg-white shadow-xl rounded-lg text-gray-900">
-      <div className="rounded-t-lg h-32 overflow-hidden">
-        <img className="object-cover object-top w-full" src='https://www.researchgate.net/publication/362488268/figure/fig1/AS:11431281079780306@1660873730064/Map-of-Ardeche-within-France-Image-source-Google-Maps-2021.png' alt='Mountain' />
+    <div className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
+      <div className="rounded-t-lg h-36 overflow-hidden">
+      <PostGoogleMap  />
+      {/* <PostGoogleMap  {lat=0, lng=0} /> */}
       </div>
-      <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-        <img className="object-cover object-center h-32" src='https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg' alt='Woman looking front' />
+      <div className="justify-left w-16 h-16 relative -mt-4 ml-2 border-4 border-white rounded-full overflow-hidden">
+        <img className="object-cover object-center h-16" src='https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg' alt='Woman looking front' />
       </div>
       <div className="text-center mt-2">
         <h2 className="font-extralight text-base text-gray-500">{props.name}</h2>

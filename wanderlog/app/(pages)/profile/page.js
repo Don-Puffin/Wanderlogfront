@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar"
 import ApiClient  from '@/utils/ApiClient';
 import { useRouter } from 'next/navigation';
-import GoogleMap from '@/app/components/Map';
+import ProfileGoogleMap from '@/app/components/ProfileGoogleMap';
 // import { CldUploadWidget } from 'next-cloudinary';
 
 import axios from 'axios';
@@ -27,7 +27,9 @@ const router = useRouter();
     username: "Loading Username",
     bio: "Loading bio",
     location: "Loading location",
-    image: "/userPlaceHolder.jpg"
+    image: "/userPlaceHolder.jpg",
+    lat: 34.672314,
+    lng: 135.484802,
   });
   const [isEditMode, setIsEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -94,17 +96,18 @@ const router = useRouter();
     <div className="flex flex-cols-2">
     <div className="sticky top-0 w-1/3  bg-white">
         <SideBar />
-        <GoogleMap />
+        
         </div>
 
         <div className="h-full w-screen bg-white">
         
 
         <div className="w-1/2 mt-10  bg-gray-100 shadow-xl rounded-lg text-gray-900">
-      <div className="rounded-t-lg h-32 overflow-hidden">
+      <div className="rounded-t-lg h-80 overflow-hidden">
       <h1 className="hidden">Profile</h1>
+      <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
       </div>
-      <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
+      <div className="mx-auto w-32 h-32 relative left-0 mt-16 border-4 border-green-300 rounded-full overflow-hidden">
         <img className="object-cover object-center h-32" src="/userPlaceHolder.jpg" alt='profileImage' />
       </div>
       <div className="text-center mt-2">
@@ -132,7 +135,7 @@ const router = useRouter();
 </>
       ) : (
         <>
-      <div className="text-xs text-center mt-5 mx-5">{currentProfile.location}</div>
+      <div className="text-xs text-center mt-5 mx-5">{currentProfile.userLocation}</div>
      <p className={`text-xs text-center mt-5 py-2 mx-5 ${expanded ? 'expanded-bio' : 'collapsed-bio'}`}>
       {expanded ? currentProfile.bio : (currentProfile.bio ? currentProfile.bio?.substring(0, 200) + '...' : "" )}
 </p>
