@@ -134,6 +134,8 @@ async authUser () {
       headers: {
         "Content-Type": "application/json",
       },
+      //postLocation needs to be an object that looks like:
+      //{name: "location name", lat: , long: , rating:}
       data: {
         postText: postText,
         postLocation: postLocation,
@@ -231,7 +233,23 @@ async authUser () {
     })
   }
 
-
+  async getMapLocations() {
+    return await axios({
+      method: "GET", // Use the appropriate HTTP method
+      url: `${url}/map/visitedPlaces`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data; // return response data
+    })
+    .catch(error => {
+      throw error; // re-throw the error to be caught by the caller
+    });
+  }
   
 }
 
