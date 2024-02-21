@@ -6,6 +6,7 @@ import SideBar from "../../components/SideBar";
 import ApiClient from '@/utils/ApiClient';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
+import CreatePost from "../../components/CreatePost";
 
 
 
@@ -83,8 +84,12 @@ const Page = () => {
           ))}
         </div>
       )}
+      <div>
+      <CreatePost />
+      </div>
     </div>
   );
+  
 };
 
 export default Page;
