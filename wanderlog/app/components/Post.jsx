@@ -9,26 +9,28 @@ import PostGoogleMap from './postGoogleMap.jsx';
 const Post = (props) => {
   // different buttons for owner and non-owner
   const client = new ApiClient();
-  const [owned, setOwned] = useState()
-  const checkUser = () => {
-    client.authUser().then(response => {
-      if (response.currentUser === props.name) {
-        console.log(response.currentUser);
-        console.log(props.name); 
-        setOwned(true)
-      } else {
-        setOwned(false)
-      }
-    }).catch(error => {
-      console.error("there was an error", error)
-    })
-  }
+  // const [owned, setOwned] = useState()
+  // const checkUser = () => {
+  //   client.authUser().then(response => {
+  //     if (response.currentUser === props.name) {
+  //       console.log(response.currentUser);
+  //       console.log(props.name); 
+  //       setOwned(true)
+  //     } else {
+  //       setOwned(false)
+  //     }
+  //   }).catch(error => {
+  //     console.error("there was an error", error)
+  //   })
+  // }
+
+  const owned = props.isOwned;
 
 
   return (
-    <div className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
+    <div  className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-36 overflow-hidden">
-      <PostGoogleMap  />
+      <PostGoogleMap postLocation = {props.postLocation} lat={props.lat} lng={props.lng} rating={props.rating}/>
       {/* <PostGoogleMap  {lat=0, lng=0} /> */}
       </div>
       <div className="justify-left w-16 h-16 relative -mt-4 ml-2 border-4 border-white rounded-full overflow-hidden">

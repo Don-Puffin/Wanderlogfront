@@ -212,6 +212,25 @@ async authUser () {
   
   }
 
+  async getOtherProfile(id) {
+    return await axios({
+      method: "GET", // Use the appropriate HTTP method
+      url: `${url}/profile/otherprofile/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data; // return response data
+    })
+    .catch(error => {
+      throw error; // re-throw the error to be caught by the caller
+    });
+  
+  }
+
   async editUserProfile(imageURL, bio, userLocation) {
     return await axios ({
       method: "PUT",
@@ -233,10 +252,12 @@ async authUser () {
     })
   }
 
-  async getMapLocations() {
+  async getMapLocations(id) {
+    let reqId = null
+    id ? reqId = id : reqId = null
     return await axios({
       method: "GET", // Use the appropriate HTTP method
-      url: `${url}/map/visitedPlaces`,
+      url: `${url}/map/visitedPlaces/${reqId}`,
       headers: {
         "Content-Type": "application/json",
       },

@@ -11,6 +11,8 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import  ApiClient from "@/utils/ApiClient";
 import { useRouter } from "next/navigation";
+import { MdHelpOutline } from "react-icons/md";
+
 
 
   const SideBar = () => {
@@ -67,9 +69,9 @@ import { useRouter } from "next/navigation";
         <div className="m-2 my-auto"> Map</div>
     </Link> 
 
-    <Link href="/toprated" className={`flex text-xl text-black mb-5 p-4 rounded-xl hover:bg-gray-200 `} style={{ backgroundColor: pathname === "/toprated" ? "#E5E7EB" : "inherit"}}> 
-        <FaStar size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms' }}/>
-        <div className="m-2 my-auto"> Top Rated</div>
+    <Link href="/help" className={`flex text-xl text-black mb-5 p-4 rounded-xl hover:bg-gray-200 `} style={{ backgroundColor: pathname === "/help" ? "#E5E7EB" : "inherit"}}> 
+        <MdHelpOutline size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms' }}/>
+        <div className="m-2 my-auto"> Help</div>
     </Link>
     <button onClick={handleLogout} className="bottom flex text-xl text-gray-900 mb-5 p-4 rounded-xl hover:bg-gray-200 cursor-pointer">
 <GiPowerButton size={30} className="transition-transform hover:scale-110" 
