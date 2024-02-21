@@ -9,20 +9,22 @@ import PostGoogleMap from './postGoogleMap.jsx';
 const Post = (props) => {
   // different buttons for owner and non-owner
   const client = new ApiClient();
-  const [owned, setOwned] = useState()
-  const checkUser = () => {
-    client.authUser().then(response => {
-      if (response.currentUser === props.name) {
-        console.log(response.currentUser);
-        console.log(props.name); 
-        setOwned(true)
-      } else {
-        setOwned(false)
-      }
-    }).catch(error => {
-      console.error("there was an error", error)
-    })
-  }
+  // const [owned, setOwned] = useState()
+  // const checkUser = () => {
+  //   client.authUser().then(response => {
+  //     if (response.currentUser === props.name) {
+  //       console.log(response.currentUser);
+  //       console.log(props.name); 
+  //       setOwned(true)
+  //     } else {
+  //       setOwned(false)
+  //     }
+  //   }).catch(error => {
+  //     console.error("there was an error", error)
+  //   })
+  // }
+
+  const owned = props.isOwned;
 
 
   return (

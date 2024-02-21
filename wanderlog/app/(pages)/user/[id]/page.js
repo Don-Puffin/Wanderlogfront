@@ -1,18 +1,15 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import SideBar from "../../components/SideBar"
+import SideBar from "../../../components/SideBar"
 import ApiClient  from '@/utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '@/app/components/ProfileGoogleMap';
 import { CldUploadWidget } from 'next-cloudinary';
 
 import axios from 'axios';
+const Page = ({ params }) => {
 
-
-
-const Page = () => {
-
-const router = useRouter();
+    const router = useRouter();
 
 
   const client = new ApiClient(
@@ -26,12 +23,12 @@ const router = useRouter();
   const [currentProfile, setCurrentProfile] = useState({
     username: "Loading Username",
     bio: "Loading bio",
-    userLocation: "Loading location",
+    location: "Loading location",
     imageURL: "/userPlaceHolder.jpg",
     lat: 34.672314,
     lng: 135.484802,
   });
-  const [isEditMode, setIsEditMode] = useState(false);
+  const isEditMode = false;
   const [loading, setLoading] = useState(true);
   const [edited, setEdited] = useState(currentProfile);
   const [expanded, setExpanded] = useState(false);
@@ -116,6 +113,8 @@ const router = useRouter();
         <div className="w-1/2 mt-10  bg-gray-100 shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-80 overflow-hidden">
       <h1 className="hidden">Profile</h1>
+      <div><h1 className="pt-20 text-center text-3xl">User : {params.id}</h1></div>
+    
       <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
       </div>
       <div className="mx-auto w-32 h-32 relative left-0 mt-16 border-4 border-green-300 rounded-full overflow-hidden">
@@ -244,3 +243,8 @@ const router = useRouter();
   }
  
 export default Page;
+
+    
+  
+  
+  
