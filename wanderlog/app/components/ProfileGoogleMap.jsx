@@ -65,16 +65,6 @@ function ProfileGoogleMap({}) {
   );
 }
 
-
-// marker.addListener('mouseover', function() {
-//   infowindow.open(map, this);
-// });
-
-// marker.addListener('mouseout', function() {
-//   infowindow.close();
-// });
-
-
 export default ProfileGoogleMap
 
 

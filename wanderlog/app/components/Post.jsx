@@ -26,9 +26,9 @@ const Post = (props) => {
 
 
   return (
-    <div className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
+    <div  className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-36 overflow-hidden">
-      <PostGoogleMap  />
+      <PostGoogleMap postLocation = {props.postLocation} lat={props.lat} lng={props.lng} rating={props.rating}/>
       {/* <PostGoogleMap  {lat=0, lng=0} /> */}
       </div>
       <div className="justify-left w-16 h-16 relative -mt-4 ml-2 border-4 border-white rounded-full overflow-hidden">

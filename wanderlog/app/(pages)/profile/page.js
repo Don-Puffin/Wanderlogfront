@@ -4,7 +4,7 @@ import SideBar from "../../components/SideBar"
 import ApiClient  from '@/utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '@/app/components/ProfileGoogleMap';
-// import { CldUploadWidget } from 'next-cloudinary';
+import { CldUploadWidget } from 'next-cloudinary';
 
 import axios from 'axios';
 
@@ -35,6 +35,7 @@ const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [edited, setEdited] = useState(currentProfile);
   const [expanded, setExpanded] = useState(false);
+  
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -73,9 +74,19 @@ const router = useRouter();
     refreshList();
   }, []);
 
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCurrentProfile(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    editUserProfile(profile)
+    client.editUserProfile(profile)
       .then(response => {
         console.log('Profile updated successfully:', response.data);
         setIsEditMode(!isEditMode);
@@ -114,24 +125,30 @@ const router = useRouter();
         <h2 className="font-extralight text-base text-gray-500">{currentProfile.username}</h2>
         <p className="font-semibold"></p>
       </div>
+      <div>
+    
 
       {isEditMode ?(
 <>
-                <input 
-                className="mx-auto text-xl  placeholder-top min-h-6"
+<form className="flex flex-col items-center justify-between" onSubmit={handleSubmit}>
+                <input
+                type= "text"
+                id="textBox"
+                className="mx-auto  placeholder-top min-h-6 m-5"
                 placeholder='Enter location'
                 name='location'
-                onSubmit={handleSubmit}
-                value={currentProfile.location}
+                value={currentProfile.userLocation}
+                onChange={handleChange}
               />
               <textarea
-                className="min-h-20 placeholder-top "
+                className="min-h-20 min-w-96 placeholder-top "
                 placeholder='Enter bio'
                 name='bio'
                 rows='6'
-                onSubmit={handleSubmit}
-                value={profile.description}
+                value={currentProfile.bio}
+                onChange={handleChange}
               />
+              </form>
 </>
       ) : (
         <>
@@ -164,7 +181,18 @@ const router = useRouter();
     null) } */}
 
       <div className="flex p-4 border-t mx-8 mt-2">
-        <button className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2">Edit</button>
+      {isEditMode ? (
+          <div>
+            {/* <h1>Edit Mode</h1> */}
+            <button onSubmit={handleSubmit}  type='submit' className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => setIsEditMode(false)}>Save</button>
+          </div>
+        ) : (
+          <div>
+            <button onSubmit={handleSubmit}  type='submit'className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => setIsEditMode(true)}>Edit</button>
+          </div>
+        )}
+      </div>
+        {/* <button className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2">Edit</button>
         
 
       <button 
@@ -172,12 +200,12 @@ const router = useRouter();
             className={`bg-${isEditMode ? 'green' : 'cyan'}-500 text-black p-2 rounded-md shadow-lg mx-auto min-w-40`}
           >
             {isEditMode ? 'Update Profile' : 'Edit Profile'}
-          </button>
+          </button> */}
 
 
 
         
-        {/* <CldUploadWidget uploadPreset="wanderlog">
+        <CldUploadWidget uploadPreset="wanderlog">
   {({ open }) => {
     return (
       <button className="w-22 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => open()}>
@@ -185,7 +213,7 @@ const router = useRouter();
       </button>
     );
   }}
-</CldUploadWidget> */}
+</CldUploadWidget>
       
       </div>
     </div>
