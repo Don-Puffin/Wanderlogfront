@@ -158,15 +158,15 @@ const router = useRouter();
       {isEditMode ?(
 <>
 <form className="flex flex-col items-center justify-between" onSubmit={handleSubmit}>
-                <input
-                type= "text"
-                id="textBox"
-                className="mx-auto  placeholder-top min-h-6 m-5"
-                placeholder='Enter location'
-                name='location'
-                value={currentProfile.userLocation}
-                onChange={handleChange}
-              />
+<input
+  type="text"
+  id="textBox"
+  className="mx-auto placeholder-top min-h-6 m-5"
+  placeholder="Enter location"
+  name="location"
+  value={currentProfile.userLocation}
+  onChange={handleChange} 
+/>
               <textarea
                 className="min-h-20 min-w-96 placeholder-top "
                 placeholder='Enter bio'

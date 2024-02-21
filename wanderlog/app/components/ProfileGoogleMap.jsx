@@ -5,7 +5,7 @@ import { GoogleMap, Marker, InfoWindow, useJsApiLoader, LoadScript } from '@reac
 import ApiClient  from '@/utils/ApiClient';
 import { useState, useEffect, Fragment } from "react";
 
-function ProfileGoogleMap({}) {
+function ProfileGoogleMap(props) {
     const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
     const centerOfWorld = { lat: 30, lng: 0 };
     const mapOptions = {
@@ -30,15 +30,11 @@ function ProfileGoogleMap({}) {
   const [locationDetails, setLocationDetails] = useState([]);
   // const [markerRef, marker] = useMarkerRef();
   const getLocations = () => {
-    client.getMapLocations().then(response => {
-      console.log(response);
-      console.log(response.mapLocations);
-      // for (let i = 0; i < response.mapLocations.length; i++) {
-      //   positions.push({lat: response.mapLocations[i].lat, lng: response.mapLocations[i].lng})
-      //   console.log(positions)
-      // }
+    console.log("id passed to map", props.id)
+    client.getMapLocations(props.id).then(response => {
       const locationDetail = response.mapLocations;
-      const positions = response.mapLocations.map(loc => ({ lat: loc.lat, lng: loc.lng }));
+      const positions = response.mapLocations ? response.mapLocations.map(loc => ({ lat: loc.lat, lng: loc.lng })) : [];
+      console.log(positions);
       setPositions(positions);
       setLocationDetails(locationDetail);
     })
@@ -70,7 +66,7 @@ function ProfileGoogleMap({}) {
       mapContainerStyle={{width: '100%', height: '100%'}}
       options={mapOptions}
       > 
-        {positions.map((position, index) => {
+        {positions.length > 0 ? positions.map((position, index) => {
         // <Marker key={index} position={position} onMouseOver ={() => handleMouseOver(index)} onMouseOut={handleMouseOut}>
         //   {isOpen === index && <InfoWindow position={position} >
         //   <h2>{locationDetails[index].name}</h2>
@@ -91,7 +87,7 @@ function ProfileGoogleMap({}) {
         );
     
         return [marker, isOpen === index && infoWindow];
-        })}
+        }) : null}
         {/* <Marker position={position} /> */}
         {/* <Marker position={position2} /> */}
       </GoogleMap>
