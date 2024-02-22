@@ -138,7 +138,7 @@ async authUser () {
       //{name: "location name", lat: , long: , rating:}
       data: {
         postText: postText,
-        postLocation: postLocation,
+        postLocationData: postLocation,
         postImage: postImage,
       },
       withCredentials: true
