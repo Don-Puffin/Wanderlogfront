@@ -7,13 +7,24 @@ function postGoogleMap(props) {
     const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
 
   const position = {lat: props.lat, lng: props.lng}
+
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: apiKeyValue
+  })
+
 return (
-  <LoadScript googleMapsApiKey={apiKeyValue}>
+  // <LoadScript googleMapsApiKey={apiKeyValue}>
+  <>
+  {isLoaded &&
       <GoogleMap  center={position} zoom={10} disableDefaultUI = {false} fullscreenControl={true} zoomControl={false} mapContainerStyle={{width: '100%', height: '100%'}}
       mapOptions={{disableDefaultUI: true}} >
       <Marker position={position} />
       </GoogleMap>
-    </LoadScript> 
+    }
+        </>
+
+    // </LoadScript> 
 );
 }
 
