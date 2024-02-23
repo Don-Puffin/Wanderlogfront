@@ -8,10 +8,12 @@ import { MdOutlinePhotoCameraBack } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 import { GiPowerButton } from "react-icons/gi";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import  ApiClient from "@/utils/ApiClient";
 import { useRouter } from "next/navigation";
 import { MdHelpOutline } from "react-icons/md";
+import {Modalbutton} from "./Modalbutton"
+import CreatePost from "./CreatePost";
 
 
 
@@ -19,6 +21,7 @@ import { MdHelpOutline } from "react-icons/md";
   const client = new ApiClient();
   const pathname = usePathname();
   const router = useRouter();
+  const [modalOpen, setModalOpen] = useState()
 
 
   useEffect(() => {
@@ -39,11 +42,14 @@ import { MdHelpOutline } from "react-icons/md";
     });
   };
   
+  const openCloseModal = () => {
+    modalOpen ? setModalOpen(false) : setModalOpen(true);
+  }
 
   return (
     <>
       <div className="sticky top-0 w-4/6 bg-gray-100  ml-0 shadow-xl rounded-lg text-gray-900">
-<div className =" flex flex-col  ">
+<div className =" flex flex-col ">
 <img className="h-auto w-3/4 ml-4 mt-4 p-2 transition-transform hover:scale-110" src= "wanderloglogobw.png" alt="wanderlog logo"/>
       
       
@@ -52,11 +58,11 @@ import { MdHelpOutline } from "react-icons/md";
         <div className="m-2 my-auto">Profile</div>
     </Link>
 
-    <Link href="/add-post" className={`flex bg-grey-300 text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/add-post" ? "##E5E7EB" : "inherit"}} >
+    <button onClick={openCloseModal} className={`flex bg-grey-300 text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/add-post" ? "##E5E7EB" : "inherit"}} >
         <IoMdAddCircleOutline size={40} className="transition-transform hover:scale-110" 
           style={{ transitionDuration: '300ms' }} />
         <div className="m-2 my-auto">Add Post</div>
-    </Link>
+    </button>
 
     {/* feed */}
     <Link href="/feed" className={`flex text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/feed" ? "#E5E7EB" : "inherit"}}> 
@@ -79,6 +85,9 @@ import { MdHelpOutline } from "react-icons/md";
     <div className="m-2 my-auto text-md cursor-pointer" > Logout</div>
     </button>
     </div>
+    </div>
+    <div className={"w-full relative"}>
+    <CreatePost isOpen={modalOpen}/>
     </div>
     </>
   );

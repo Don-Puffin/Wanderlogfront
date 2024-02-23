@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import ApiClient from "../../../utils/ApiClient";
 import { useRouter } from "next/navigation";
+import {Tooltip, Button} from "@nextui-org/react";
+import Link from 'next/link'
+import { IoIosHelpCircleOutline } from "react-icons/io";
 
 const RegisterForm = () => {
   const [password, setPassword] = useState('');
@@ -93,7 +96,7 @@ const RegisterForm = () => {
 
 
   return (
-    <div className="w-full mt-5 max-w-xs">
+    <div className="w-full mt-5 max-w-xs fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
       <form onSubmit={submitHandler} className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 login-form">
         <h2 className="text-center">Register</h2>
         <h2 className="text-center mb-5">to add your location</h2>
@@ -102,8 +105,22 @@ const RegisterForm = () => {
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-            Username
+            Username 
+            {/* <Tooltip
+      content={
+        <div className="bg-slate-200 px-1 py-2">
+          <div className="bg-slate-200 text-small font-bold">Custom Content</div>
+          <div className="text-tiny">How To Register</div>
+          <Link href="./help">Help Page</Link>
+        </div>
+      }
+    >
+      <button>
+      <IoIosHelpCircleOutline />
+      </button>
+    </Tooltip> */}
           </label>
+          
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
@@ -148,6 +165,7 @@ const RegisterForm = () => {
           </button>
         </div>
       </form>
+      
     </div>
   );
 };

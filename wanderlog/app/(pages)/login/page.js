@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import ApiClient from "@/utils/ApiClient";
+import ApiClient from "../../../utils/ApiClient";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
