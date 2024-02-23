@@ -4,11 +4,17 @@ import { Loader } from '@googlemaps/js-api-loader'
 import ApiClient  from '@/utils/ApiClient';
 import Autocomplete from "react-google-autocomplete";
 import axios from 'axios';
+import {refreshList} from '../(pages)/feed/page.js';
+import {NextUIProvider} from "@nextui-org/react";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
+import { CldUploadWidget } from 'next-cloudinary';
 
 const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 
-const CreatePost = () => {
-
+const CreatePost = (props) => {
+  console.log(props.isOpen)
+    const isOpen = props.isOpen
+  
     const [userLat, setUserLat] = useState (0)
     const [userLng, setUserLng] = useState (0)
     const [locationName, setLocationName] = useState ("")
@@ -18,26 +24,10 @@ const CreatePost = () => {
 
     const client = new ApiClient();
 
-    // const loader = new Loader({
-    //   apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-    //   version: "weekly",
-    // });
-  //   useEffect(() => {
-  //     const loader = new Loader({
-  //         apiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-  //         version: "weekly",
-  //     });
-
-  //     loader.load().then(() => {
-  //         console.log('Google Maps API loaded successfully');
-  //     }).catch((error) => {
-  //         console.error('Error loading Google Maps API:', error);
-  //     });
-  // }, []);
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
         const postLocation = {name: "", lat: 0, long: 0, rating: 0}
         postLocation.name = locationName
         console.log("name", postLocation.name)
@@ -49,24 +39,18 @@ const CreatePost = () => {
 
         client.createPost(postText, postLocation, postImage)
         .then(response => {
+          ;
+          
+          alert("Post created successfully");
             console.log(response)
         })
         .catch(error => {
             console.error(error)
         })
+        
     }
 
-    const handleLocation = async (placeId) => {
-        // const geocoder = new Geocoder()
-        // geocoder.geocode({address: locationName})
-        // .then((response) => {
-        //     setUserLat(response.results[0].geometry.location.lat())
-        //     setUserLng(response.results[0].geometry.location.lng())
-        // })
-        // .catch((error) => {
-        //     console.log(error)
-        // })
-        // console.log(placeId)
+    const handleLocation = async (placeId) => {    
         let googleMapsResponse = []
         try {
           googleMapsResponse = await axios.get(
@@ -82,14 +66,28 @@ const CreatePost = () => {
           setUserLng(lng);
   
         };
-  
+    
+        // const hideModal = () => {
+        //   const modalElement = document.getElementById('modalHide');
+        //   if (isOpen) {
+        //     modalElement.classList.remove('hidden');
+        //   } else {
+        //     modalElement.classList.add("hidden")
+        //   }
+        // };
+        
+
+        // useEffect(() => {
+        //   hideModal();
+        // }, [])
 
   return (
-    <div>
-        
-<form id="form" className="sticky max-w-screen top-0 mx-auto w-1/4 border-2 border-black p-4 bg-cyan-300" onSubmit={handleSubmit}>
-  <label>
-    {/* User types location, autocomplete helps,location sent to geocoder, lat/long returned in useState */}
+  // isOpen &&  (  // <div className="bg-gray-100 z-0 w-screen h-screen absolute top-0">
+    <div className='fixed'>    
+<form id="form" className=" max-w-screen top-0 mx-auto h-96 w-96 shadow-xl rounded-lg  p-4 bg-gray-100" onSubmit={handleSubmit}>
+  <div className="gap-4">
+  <h2 className="text-center text-xl font-bold">Create Post</h2>
+  <label className="mt-4"> 
     Location:
   <Autocomplete
   apiKey={apiKeyValue}
@@ -103,27 +101,52 @@ const CreatePost = () => {
     types: ["(regions)"],
   }}
   defaultValue="Amsterdam"
-  />;
+  />
+  </label>
+  <label className="py-4">
+  Description:
+    <textarea type="text" name="text" className="p-4 w-80"/>
   </label>
   <label>
-    Info:
-    <input type="text" name="text" />
-  </label>
-  <label>
+    <br/>
     Rating:
     <input type="number" name="rating" />
   </label>
   <label>
-    Submit:
-  <input type="submit" value="Submit"/>
+  <CldUploadWidget 
+      onSuccess={(results, error) => {    
+        if (error) {
+          console.log(error);
+        }
+        console.log(results.event);
+        console.log('URL:', results.info.url);
+        console.log(currentProfile.imageURL)
+        client.editUserProfile(results.info.url)
+        .then(response => {
+          console.log('Profile picture updated successfully:', response.data);})
+        .catch(error => {
+          console.error("Error updating profile picture", error)
+        })
+      }}
+      uploadPreset="wanderlog" >
+  {({ open }) => {
+    return (
+      <button className="mt-2 w-22 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => open()}>
+        Upload
+      </button>
+    );
+  }}
+</CldUploadWidget>
+  <input type="submit" value="Submit" className="bottom border-2 border-black hover:bg-black cursor-pointer text-black hover:text-white font-bold py-2 px-4 rounded"/>
   </label>
+  </div>
 </form>
-
-
-
-    </div>
-  )
+</div>
+    // </div>
+ )
+  
 }
+
 
 export default CreatePost
 

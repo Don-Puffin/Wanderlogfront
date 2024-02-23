@@ -17,7 +17,7 @@ return (
   // <LoadScript googleMapsApiKey={apiKeyValue}>
   <>
   {isLoaded &&
-      <GoogleMap  center={position} zoom={10} disableDefaultUI = {false} fullscreenControl={true} zoomControl={false} mapContainerStyle={{width: '100%', height: '100%'}}
+      <GoogleMap zIndex={0} center={position} zoom={10} disableDefaultUI = {false} fullscreenControl={true} zoomControl={false} mapContainerStyle={{width: '100%', height: '100%'}}
       mapOptions={{disableDefaultUI: true}} >
       <Marker position={position} />
       </GoogleMap>

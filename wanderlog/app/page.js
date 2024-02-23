@@ -3,9 +3,11 @@
 import React from 'react'
 import { TypeAnimation } from 'react-type-animation';
 import Link from 'next/link';
+import {NextUIProvider} from "@nextui-org/react";
 
 const page = () => {
   return (
+    // <NextUIProvider>
     <body>
       <div id="blackback" className="h-full">
         <div>
@@ -46,6 +48,7 @@ const page = () => {
         </div>
       </div>
     </body>
+    // </NextUIProvider>
   )
 }
 

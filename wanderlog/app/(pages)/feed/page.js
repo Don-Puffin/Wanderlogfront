@@ -3,10 +3,11 @@
 import React from 'react';
 import Post from "../../components/Post";
 import SideBar from "../../components/SideBar";
-import ApiClient from '@/utils/ApiClient';
+import ApiClient from '../../../utils/ApiClient';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import CreatePost from "../../components/CreatePost";
+
 
 
 
@@ -64,7 +65,9 @@ const Page = () => {
       <div className="sticky top-0 w-1/3 bg-white">
         <SideBar />
       </div>
-
+      <div>
+      {/* <CreatePost /> */}
+      </div>
       {loading && <div className="text-black mx-auto p-10">Wanderlog is loading...</div>}
 
       {!loading &&!posts.length && (
@@ -80,13 +83,11 @@ const Page = () => {
       {posts.length > 0 && (
         <div className="grid grid-cols-3 gap-10 h-full w-screen bg-white">
           {posts.map((post) => (
-            <Post key={post._id} name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} />
+            <Post key={post._id} zIndex={1}  name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} />
           ))}
         </div>
       )}
-      <div>
-      <CreatePost />
-      </div>
+    
     </div>
   );
   
