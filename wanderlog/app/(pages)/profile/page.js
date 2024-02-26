@@ -14,13 +14,10 @@ const Page = () => {
 
 const router = useRouter();
 
-
   const client = new ApiClient(
     () => token,
     () => logout()
   );
-
- 
 
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
   const [currentProfile, setCurrentProfile] = useState({
@@ -109,7 +106,7 @@ const router = useRouter();
     
     <div className="flex flex-cols-2">
     <div className="sticky top-0 w-1/3  bg-white">
-        <SideBar />
+        <SideBar triggerVisibilityChangeInParent={() => {return false}}/>
         
         </div>
 

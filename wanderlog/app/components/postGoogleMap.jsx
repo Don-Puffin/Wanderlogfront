@@ -4,16 +4,19 @@ import React from 'react'
 import { GoogleMap, Marker, useJsApiLoader, LoadScript } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 
+const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
+const googleLibraries = ["places","maps"]
+
 function postGoogleMap(props) {
 
-    const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
     const [supressGoogle, setSupressGoogle] = useState(false)
 
   const position = {lat: props.lat, lng: props.lng}
-
+  
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: apiKeyValue
+    googleMapsApiKey: apiKeyValue,
+    libraries: googleLibraries
   })
 
   useEffect(() => { 
