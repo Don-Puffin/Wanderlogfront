@@ -9,7 +9,7 @@ import { FaStar } from "react-icons/fa";
 import { GiPowerButton } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import  ApiClient from "@/utils/ApiClient";
+import  ApiClient from "../../utils/ApiClient";
 import { useRouter } from "next/navigation";
 import { MdHelpOutline } from "react-icons/md";
 import {Modalbutton} from "./Modalbutton"
@@ -17,7 +17,7 @@ import CreatePost from "./CreatePost";
 
 
 
-  const SideBar = () => {
+  const SideBar = (props) => {
   const client = new ApiClient();
   const pathname = usePathname();
   const router = useRouter();
@@ -45,6 +45,10 @@ import CreatePost from "./CreatePost";
   const openCloseModal = () => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
   }
+
+  useEffect(() => {
+   props.triggerVisibilityChangeInParent(modalOpen)
+  }, [modalOpen]);
 
   return (
     <>

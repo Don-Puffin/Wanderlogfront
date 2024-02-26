@@ -2,7 +2,7 @@ import React from 'react'
 // import {APIProvider, Map, Marker, useMarkerRef, useMapsLibrary, InfoWindow} from '@vis.gl/react-google-maps';
 import { GoogleMap, Marker, InfoWindow, useJsApiLoader, LoadScript} from '@react-google-maps/api';
 // import {currentProfile} from '../../app/(pages)/profile/page.js';
-import ApiClient  from '@/utils/ApiClient';
+import ApiClient  from '../../utils/ApiClient';
 import { useState, useEffect, Fragment } from "react";
 
 function ProfileGoogleMap(props) {
@@ -48,15 +48,16 @@ function ProfileGoogleMap(props) {
   //   markerRef.current.close();
   // }
 
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: apiKeyValue
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: apiKeyValue
     
-  // })
+  })
 
   return (
     <>
-    <LoadScript googleMapsApiKey={apiKeyValue}>
+    {/* <LoadScript googleMapsApiKey={apiKeyValue}> */}
+    {isLoaded &&
       <GoogleMap  
       center={centerOfWorld} 
       zoom={1.6}
@@ -90,8 +91,8 @@ function ProfileGoogleMap(props) {
         }) : null}
         {/* <Marker position={position} /> */}
         {/* <Marker position={position2} /> */}
-      </GoogleMap>
-      </LoadScript>
+      </GoogleMap>}
+      {/* </LoadScript> */}
     </>
     )
 }
