@@ -52,7 +52,7 @@ import CreatePost from "./CreatePost";
 
   return (
     <>
-      <div className="sticky top-0 w-4/6 bg-gray-100  ml-0 shadow-xl rounded-lg text-gray-900">
+      <div className="sticky  top-0 w-full h-screen bg-gray-100  ml-0 shadow-xl rounded-lg text-gray-900" id="sidebar">
 <div className =" flex flex-col ">
 <img className="h-auto w-3/4 ml-4 mt-4 p-2 transition-transform hover:scale-110" src= "wanderloglogobw.png" alt="wanderlog logo"/>
       
@@ -83,15 +83,15 @@ import CreatePost from "./CreatePost";
         <MdHelpOutline size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms' }}/>
         <div className="m-2 my-auto"> Help</div>
     </Link>
-    <button onClick={handleLogout} className="bottom flex text-xl text-gray-900 mb-5 p-4 rounded-xl hover:bg-gray-200 cursor-pointer">
+    <button onClick={handleLogout} className="bottom-0 flex text-xl text-gray-900 mb-5 p-4 rounded-xl hover:bg-gray-200 cursor-pointer">
 <GiPowerButton size={30} className="transition-transform hover:scale-110" 
     style={{ transitionDuration: '300ms' }}/>
     <div className="m-2 my-auto text-md cursor-pointer" > Logout</div>
     </button>
     </div>
     </div>
-    <div className={"w-full relative"}>
-    <CreatePost isOpen={modalOpen}/>
+    <div className={"w-full"} id="modal-container">
+    <CreatePost isOpen={modalOpen} setIsOpen={setModalOpen}/>
     </div>
     </>
   );

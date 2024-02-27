@@ -1,5 +1,5 @@
 import React from 'react'
-import SideBar from "../../components/SideBar"
+import SideBar from "../../components/Sidebar"
 import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
 

@@ -86,4 +86,22 @@ body, #blackback {
       }
 
 
-      
+      /* #gray-overlay {
+        z-index:40;
+      }
+
+      #sidebar {
+        z-index: 30;
+      }
+
+      #modal {
+        z-index: 1000;
+      }
+
+      #modal-container {
+        z-index: 1000;
+      } */
+
+      #navabr {
+        z-index: 1000;
+      }

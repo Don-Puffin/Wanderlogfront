@@ -9,6 +9,8 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDis
 import { CldUploadWidget } from 'next-cloudinary';
 import {useRouter} from "next/navigation";
 import { useJsApiLoader, Autocomplete } from '@react-google-maps/api';
+// import {openCloseModal} from '../components/Sidebar.jsx';
+import {FaRegWindowClose} from "react-icons/fa";
 
 const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 const googleLibraries = ["places","maps"]
@@ -18,8 +20,10 @@ const CreatePost = (props) => {
 
   const router = useRouter();
 
-  const isOpen = props.isOpen
+  let isOpen = props.isOpen
   
+  const [modalOpen, setModalOpen] = useState(isOpen)
+
     const [userLat, setUserLat] = useState (0)
     const [userLng, setUserLng] = useState (0)
     const [locationName, setLocationName] = useState ("")
@@ -46,6 +50,12 @@ const CreatePost = (props) => {
     setLocationName(place.formatted_address)
     const placeId = place.place_id
     handleLocation(placeId)
+  }
+
+
+  const openCloseModal = () => {
+    // modalOpen ? setModalOpen(false) : setModalOpen(true);
+    props.setIsOpen(!isOpen)
   }
 
     const handleSubmit = async (event) => {
@@ -106,13 +116,17 @@ const CreatePost = (props) => {
 
   return (
    isOpen &&  (   
-    <div className='fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'
+    <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' id="modal"
 
-    >        
+    >
+  <button onClick={openCloseModal}>
+   <FaRegWindowClose className="text-black hover:text-red"/>
+  </button>      
 <form id="form" className=" max-w-screen top-0 mx-auto h-96 w-96 shadow-xl rounded-lg  p-4 bg-gray-100 z-50" onSubmit={handleSubmit}
 >
   <div className="gap-4">
   <h2 className="text-center text-xl font-bold">Create Post</h2>
+
   <label className="mt-4" for="location" > 
     Location:
     </label>

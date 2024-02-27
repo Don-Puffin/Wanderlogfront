@@ -2,12 +2,12 @@
 
 import React from 'react';
 import Post from "../../components/Post";
-import SideBar from "../../components/SideBar";
+import SideBar from "../../components/Sidebar";
 import ApiClient from '../../../utils/ApiClient';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 import CreatePost from "../../components/CreatePost";
-
+import NavBar from "../../components/Navbar";
 
 
 
@@ -62,25 +62,40 @@ const Page = () => {
   }
 
   return (
-    <div className="flex flex-cols-2"
+    <div className="flex flex-col md:flex-row  ">
     
-    >
+
       {hideMapInComponentTree &&
               <div
-              className="bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
+              className=" bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
               style={{
                 opacity: "0.5",
+                
               }}
+              id= "gray-overlay"
             ></div>
       }
 
-      <div className="sticky top-0 w-1/3 bg-white">
-        <SideBar 
-          triggerVisibilityChangeInParent={
-            (visibility) => setHideMapInComponentTree(visibility)
-          }
-        />
-      </div>
+
+  <div className="md:hidden sticky top-0 z-50" id="navbar">
+  <NavBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)} />
+  {hideMapInComponentTree &&
+    <div
+      className="bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
+      style={{
+        opacity: "0.5",
+      }}
+    ></div>
+  
+      }
+    </div>
+
+    
+    <div className="hidden md:block sticky top-0 w-1/3  bg-white">
+        <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)
+}/>
+        
+        </div>
       <div>
       {/* <CreatePost /> */}
       </div>
@@ -97,9 +112,9 @@ const Page = () => {
       )}
 
       {posts.length > 0 && (
-        <div className="grid grid-cols-3 gap-10 h-full w-screen bg-white">
+        <div className="ml-10 grid grid-cols-3 gap-10 h-full w-screen bg-white">
           {posts.map((post) => (
-            <Post key={post._id} zIndex={1}  name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} rating={post.rating} hideGoogleMap={hideMapInComponentTree}/>
+            <Post key={post.id} idValue={post.id} zIndex={1}  name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} rating={post.rating} isOwned={post.isOwned} hideGoogleMap={hideMapInComponentTree}/>
           ))}
         </div>
       )}

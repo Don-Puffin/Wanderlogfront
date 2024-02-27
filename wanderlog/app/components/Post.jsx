@@ -4,12 +4,19 @@ import ApiClient from '../../utils/ApiClient';
 import PostGoogleMap from './postGoogleMap.jsx';
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
+import { FaRegTrashAlt } from "react-icons/fa";
 // import share from "./share.png";
 
 
 
 // console.log(share)
 const Post = (props) => {
+
+  const [showPhoto, setShowPhoto] = useState(false)
+  const toggleShowPhoto = ()=>{
+
+        setShowPhoto(!showPhoto)
+  };
   // different buttons for owner and non-owner
   const client = new ApiClient();
   // const [owned, setOwned] = useState()
@@ -36,10 +43,17 @@ const Post = (props) => {
   
     // setShowStars(props.rating)
   
-  
-  
-  
- 
+  const deletePost = () => {
+    client.deletePost(props.idValue)
+    .then(response => {
+      console.log(response)
+      window.location.reload();
+    })
+    .catch(error => {
+      console.error(error)
+    })
+  }
+
 
   // Determine which div to show based on the value of num
   if (stars === 1) {
@@ -94,11 +108,18 @@ const Post = (props) => {
         </li>
       </ul>
       <div className="p-4 border-t mx-8 mt-2">
-        <button className="w-1/3 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2">More</button>
+      <button className="w-1/3 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500  p-2" onClick={toggleShowPhoto}>Photo</button>
       </div>
       {/* button renders conditionally depending on if owner */}
+      {showPhoto? (
+      <img className="w-72" src='https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg' alt='travel_photo' />
+      ): (null)}
+      
       {owned ? (
-        <button>Edit</button>
+        <div>
+        <button className="w-1/3 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500  p-2">Edit</button>
+        <button className="max-auto fill-gray-400" onClick={deletePost}><FaRegTrashAlt /></button>
+        </div>
       ) : (
         null
       )}

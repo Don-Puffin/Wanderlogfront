@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import SideBar from "../../components/SideBar"
+import SideBar from "../../components/Sidebar.jsx"
 import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
@@ -20,6 +20,8 @@ import {
 } from "react-share";
 
 import axios from 'axios';
+
+import NavBar from "../../components/Navbar";
 
 
 
@@ -47,7 +49,8 @@ const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [edited, setEdited] = useState(currentProfile);
   const [expanded, setExpanded] = useState(false);
-  
+  const [hideMapInComponentTree, setHideMapInComponentTree] = useState(false);
+
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -101,7 +104,7 @@ const router = useRouter();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    client.editUserProfile(profile)
+    client.editUserProfile(currentProfile.imageURL, currentProfile.bio, currentProfile.userLocation)
       .then(response => {
         console.log('Profile updated successfully:', response.data);
         setIsEditMode(!isEditMode);
@@ -120,30 +123,46 @@ const router = useRouter();
   return (
 
     
-    <div className="flex flex-cols-2">
-    <div className="sticky top-0 w-1/3  bg-white">
-        <SideBar triggerVisibilityChangeInParent={() => {return false}}/>
+<div className="flex flex-col md:flex-row  ">
+  <div className="md:hidden sticky top-0 z-50" id="navbar">
+  <NavBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)} />
+  {hideMapInComponentTree &&
+    <div
+      className="bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
+      style={{
+        opacity: "0.5",
+      }}
+    ></div>
+  
+      }
+    </div>
+    <div className="hidden md:block sticky top-0 w-1/3  bg-white">
+        <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)
+}/>
         
         </div>
 
         <div className="h-full w-screen bg-white">
         
 
-        <div className="w-1/2 mt-10  bg-gray-100 shadow-xl rounded-lg text-gray-900">
+        <div className="w-11/12 md:w-3/4 mt-10 mx-auto bg-gray-100 shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-80 overflow-hidden">
       <h1 className="hidden">Profile</h1>
+      {
+        hideMapInComponentTree && <img className="w-full h-36 object-cover object-center" src={`https://a.ccdn.es/cnet/contents/media/own/2022/6/1299003.jpg/900x505cut/`} alt="post image" />
+      }
       {
         loading ? (
           <div>Loading map...</div>
         ) : (
           // just changed this - Alfie
-          <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
+          <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng} hideMap={hideMapInComponentTree}/>
           // currentProfile?.lat && currentProfile?.lng && <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
 
         )
       }
       </div>
-      <div className="mx-auto w-32 h-32 relative left-0 mt-16 border-4 border-green-300 rounded-full overflow-hidden">
+      <div className="mx-auto w-32 h-32 left-0 mt-16 border-4 border-green-300 rounded-full overflow-hidden">
         <img className="object-cover object-center h-32" src={currentProfile.imageURL} />
       </div>
       
@@ -252,7 +271,7 @@ const router = useRouter();
       {isEditMode ? (
           <div>
             {/* <h1>Edit Mode</h1> */}
-            <button onSubmit={handleSubmit}  type='submit' className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => setIsEditMode(false)}>Save</button>
+            <button onSubmit={handleSubmit}  type='submit' className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={handleSubmit}>Save</button>
           </div>
         ) : (
           <div>
