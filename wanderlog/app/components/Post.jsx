@@ -1,8 +1,11 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import ApiClient from '@/utils/ApiClient';
+import ApiClient from '../..//utils/ApiClient';
 import PostGoogleMap from './postGoogleMap.jsx';
+import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa6";
 // import share from "./share.png";
+
 
 
 // console.log(share)
@@ -26,6 +29,35 @@ const Post = (props) => {
 
   const owned = props.isOwned;
 
+  let content;
+
+  const stars = (props.rating)
+  
+  
+    // setShowStars(props.rating)
+  
+  
+  
+  
+ 
+
+  // Determine which div to show based on the value of num
+  if (stars === 1) {
+    content = <div className="flex text-yellow-500"><FaStar /><CiStar /><CiStar /><CiStar /><CiStar /></div>;
+  } else if (stars === 2) {
+    content = <div className="flex text-yellow-500"><FaStar /><FaStar /><CiStar /><CiStar /><CiStar /></div>;
+  } else if (stars === 3) {
+    content = <div className="flex text-yellow-500"><FaStar /><FaStar /><FaStar /><CiStar /><CiStar /></div>;
+  } 
+  else if (stars === 4) {
+    content = <div className="flex text-yellow-500"><FaStar /><FaStar /><FaStar /><FaStar /><CiStar /></div>;
+  }else if (stars => 5) {
+    content = <div className="flex text-yellow-500"><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></div>;
+  }else {
+    content = <div>No Rating Given</div>;
+
+  }
+
 
   return (
     <div  className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900 ">
@@ -36,11 +68,14 @@ const Post = (props) => {
       <div className="justify-left w-16 h-16 relative -mt-4 ml-2 border-4 border-white rounded-full overflow-hidden">
         <img className=" object-cover object-center h-16" src='https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg' alt='Woman looking front' />
       </div>
-      <div className="text-center mt-2">
+      <div className="text-center mt-2 items-center">
         <h2 className="font-extralight text-base text-gray-500">{props.name}</h2>
         <p className="font-semibold">{props.location}</p>
+        <p className="ml-28 mt-2 ">{content}</p>
+        
       </div>
       <div className="text-xs text-center mt-5 mx-5">{props.info}</div>
+      <div></div>
       <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
         <li className="flex flex-col items-center justify-around">
           

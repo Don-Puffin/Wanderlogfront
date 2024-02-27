@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Loader } from '@googlemaps/js-api-loader' 
-import ApiClient  from '@/utils/ApiClient';
+import ApiClient  from '../../utils/ApiClient';
 import Autocomplete from "react-google-autocomplete";
 import axios from 'axios';
 import {refreshList} from '../(pages)/feed/page.js';

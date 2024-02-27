@@ -2,7 +2,7 @@ import React from 'react'
 // import {APIProvider, Map, Marker, useMarkerRef, useMapsLibrary, InfoWindow} from '@vis.gl/react-google-maps';
 import { GoogleMap, Marker, InfoWindow, useJsApiLoader, LoadScript} from '@react-google-maps/api';
 // import {currentProfile} from '../../app/(pages)/profile/page.js';
-import ApiClient  from '@/utils/ApiClient';
+import ApiClient  from '../../utils/ApiClient';
 import { useState, useEffect, Fragment } from "react";
 
 function ProfileGoogleMap(props) {

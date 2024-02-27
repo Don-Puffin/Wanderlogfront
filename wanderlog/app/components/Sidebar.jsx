@@ -9,7 +9,7 @@ import { FaStar } from "react-icons/fa";
 import { GiPowerButton } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import  ApiClient from "@/utils/ApiClient";
+import  ApiClient from "../../utils/ApiClient";
 import { useRouter } from "next/navigation";
 import { MdHelpOutline } from "react-icons/md";
 import {Modalbutton} from "./Modalbutton"
