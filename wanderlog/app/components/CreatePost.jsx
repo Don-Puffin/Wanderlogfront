@@ -2,35 +2,54 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Loader } from '@googlemaps/js-api-loader' 
 import ApiClient  from '../../utils/ApiClient';
-import Autocomplete from "react-google-autocomplete";
 import axios from 'axios';
 import {refreshList} from '../(pages)/feed/page.js';
 import {NextUIProvider} from "@nextui-org/react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import { CldUploadWidget } from 'next-cloudinary';
 import {useRouter} from "next/navigation";
-import { usePlacesWidget } from "react-google-autocomplete";
-import AutocompleteBox from './AutocompleteBox';
-
+import { useJsApiLoader, Autocomplete } from '@react-google-maps/api';
 
 const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
+const googleLibraries = ["places","maps"]
+
 
 const CreatePost = (props) => {
-  console.log(props.isOpen)
-    const isOpen = props.isOpen
+
+  const router = useRouter();
+
+  const isOpen = props.isOpen
   
     const [userLat, setUserLat] = useState (0)
     const [userLng, setUserLng] = useState (0)
     const [locationName, setLocationName] = useState ("")
     const [placeID, setPlaceID] = useState ("")
+    const [searchResult, setSearchResult] = useState("")
     
     const [imageURL, setImageURL] = useState ("/images/placeholder.png")
+    
 
     const client = new ApiClient();
+  
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: apiKeyValue,
+    libraries: googleLibraries
+  })
 
+  const onLoadFunction = (autocomplete) => {
+    setSearchResult(autocomplete);
+  }
+
+  const onPlaceChangedFunction = () => {
+    const place = searchResult.getPlace();
+    setLocationName(place.formatted_address)
+    const placeId = place.place_id
+    handleLocation(placeId)
+  }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         
         const postLocation = {name: "", lat: 0, long: 0, rating: 0}
         postLocation.name = locationName
@@ -43,8 +62,9 @@ const CreatePost = (props) => {
 
         client.createPost(postText, postLocation, postImage)
         .then(response => {
-          alert("Post created successfully");
+            alert("Post created successfully");
             console.log(response)
+            router.push('/feed')
             router.refresh();
         })
         .catch(error => {
@@ -84,22 +104,8 @@ const CreatePost = (props) => {
         //   hideModal();
         // }, [])
 
-        const { ref, autocompleteRef } = usePlacesWidget({
-          apiKey: apiKeyValue,
-          onPlaceSelected: (place) => {
-            setLocationName(place.formatted_address)
-            const placeId = place.place_id
-            handleLocation(placeId)
-          },
-          options: {
-            types: ["(regions)"],
-          },
-          defaultValue: "Amsterdam"
-        });
-
   return (
    isOpen &&  (   
-  //  <div className="bg-gray-100 z-0 w-screen h-screen absolute top-0">
     <div className='fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'
 
     >        
@@ -107,27 +113,13 @@ const CreatePost = (props) => {
 >
   <div className="gap-4">
   <h2 className="text-center text-xl font-bold">Create Post</h2>
-  <label className="mt-4"  > 
+  <label className="mt-4" for="location" > 
     Location:
-  <script
-  type="text/javascript"
-  src={`https://maps.googleapis.com/maps/api/js?key=${apiKeyValue}&libraries=places`}
-  ></script> 
-  <Autocomplete
-  apiKey={apiKeyValue}
-  style={{ width: "90%", z: 10 }}
-  onPlaceSelected={(place) => {
-    setLocationName(place.formatted_address)
-    const placeId = place.place_id
-    handleLocation(placeId)
-  }}
-  options={{
-    types: ["(regions)"],
-  }}
-  defaultValue=""
-  /> 
-  <input ref={ref}/>
-  </label>
+    </label>
+  {isLoaded && <Autocomplete onLoad={onLoadFunction} onPlaceChanged={onPlaceChangedFunction}> 
+    <input id="location-input" name="location" type="text" placeholder="Amsterdam"></input>
+  </Autocomplete>
+  }
   <label className="py-4">
   Description:
     <textarea type="text" name="text" className="p-4 w-80"/>
@@ -167,7 +159,6 @@ const CreatePost = (props) => {
   </div>
 </form>
 </div>
-    // </div>
  )
   )
 }

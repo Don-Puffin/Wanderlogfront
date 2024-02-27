@@ -7,6 +7,8 @@ import { useState, useEffect, Fragment } from "react";
 
 function ProfileGoogleMap(props) {
     const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
+    const googleLibraries = ["places","maps"]
+
     const centerOfWorld = { lat: 30, lng: 0 };
     const mapOptions = {
       disableDefaultUI: true
@@ -50,8 +52,8 @@ function ProfileGoogleMap(props) {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: apiKeyValue
-    
+    googleMapsApiKey: apiKeyValue,
+    libraries: googleLibraries
   })
 
   return (
