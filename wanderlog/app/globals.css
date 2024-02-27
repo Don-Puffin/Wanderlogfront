@@ -35,8 +35,12 @@ body, #blackback {
   align-items: center; 
   height: 100%; 
 }
-
-
+#image{
+  z-index: 0 ;
+}
+#image-con{
+  z-index: 0;
+}
 
 
 

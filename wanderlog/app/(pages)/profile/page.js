@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar"
 import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
-import ProfileGoogleMap from '../../../app/components/ProfileGoogleMap';
+import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import { CldUploadWidget } from 'next-cloudinary';
 import {
   EmailShareButton,
@@ -61,6 +61,8 @@ const router = useRouter();
       .then(response => {
         if (response.status === 200) {
           setIsAuthenticated(true);
+          // just changed this - Alfie
+          refreshList();
         } else {
           router.push('/');
         }
@@ -86,7 +88,8 @@ const router = useRouter();
 
   useEffect(() => {
     authUser();
-    refreshList();
+    // just changed this - Alfie
+    // if (isAuthenticated) refreshList();
   }, []);
 
 
@@ -132,7 +135,16 @@ const router = useRouter();
         <div className="w-1/2 mt-10  bg-gray-100 shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-80 overflow-hidden">
       <h1 className="hidden">Profile</h1>
-      <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
+      {
+        loading ? (
+          <div>Loading map...</div>
+        ) : (
+          // just changed this - Alfie
+          <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
+          // currentProfile?.lat && currentProfile?.lng && <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
+
+        )
+      }
       </div>
       <div className="mx-auto w-32 h-32 relative left-0 mt-16 border-4 border-green-300 rounded-full overflow-hidden">
         <img className="object-cover object-center h-32" src={currentProfile.imageURL} />

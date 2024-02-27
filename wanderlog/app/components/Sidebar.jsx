@@ -17,7 +17,7 @@ import CreatePost from "./CreatePost";
 
 
 
-  const SideBar = () => {
+  const SideBar = (props) => {
   const client = new ApiClient();
   const pathname = usePathname();
   const router = useRouter();
@@ -45,6 +45,10 @@ import CreatePost from "./CreatePost";
   const openCloseModal = () => {
     modalOpen ? setModalOpen(false) : setModalOpen(true);
   }
+
+  useEffect(() => {
+   props.triggerVisibilityChangeInParent(modalOpen)
+  }, [modalOpen]);
 
   return (
     <>

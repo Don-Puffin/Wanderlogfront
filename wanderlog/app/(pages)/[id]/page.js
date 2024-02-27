@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SideBar from "../../components/SideBar"
 import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
-import ProfileGoogleMap from '../../../app/components/ProfileGoogleMap';
+import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import { CldUploadWidget } from 'next-cloudinary';
 
 import axios from 'axios';

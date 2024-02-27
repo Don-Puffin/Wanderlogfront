@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import ApiClient from '../..//utils/ApiClient';
+import ApiClient from '../../utils/ApiClient';
 import PostGoogleMap from './postGoogleMap.jsx';
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
@@ -61,12 +61,17 @@ const Post = (props) => {
 
   return (
     <div  className="w-72 mt-10 bg-white shadow-xl rounded-lg text-gray-900 ">
-      <div  className="rounded-t-lg h-36 overflow-hidden">
-      <PostGoogleMap  postLocation = {props.postLocation} lat={props.lat} lng={props.lng} rating={props.rating}/>
+      <div className="rounded-t-lg h-36 overflow-hidden">
+      {
+        props.hideGoogleMap && <img className="w-full h-36 object-cover object-center" src={`https://a.ccdn.es/cnet/contents/media/own/2022/6/1299003.jpg/900x505cut/`} alt="post image" />
+      }
+      <PostGoogleMap  postLocation = {props.postLocation} lat={props.lat} lng={props.lng} rating={props.rating}
+        hideMap={props.hideGoogleMap}
+      />
       {/* <PostGoogleMap  {lat=0, lng=0} /> */}
       </div>
-      <div className="justify-left w-16 h-16 relative -mt-4 ml-2 border-4 border-white rounded-full overflow-hidden">
-        <img className=" object-cover object-center h-16" src='https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg' alt='Woman looking front' />
+      <div className="mt-2 justify-left w-16 h-16 ml-2 border-4 border-black rounded-full overflow-hidden">
+        <img  className=" object-cover object-center h-16" src ='vercel.svg' alt='Woman looking front' />
       </div>
       <div className="text-center mt-2 items-center">
         <h2 className="font-extralight text-base text-gray-500">{props.name}</h2>

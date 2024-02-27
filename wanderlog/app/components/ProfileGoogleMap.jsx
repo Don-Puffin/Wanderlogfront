@@ -48,15 +48,16 @@ function ProfileGoogleMap(props) {
   //   markerRef.current.close();
   // }
 
-  // const { isLoaded } = useJsApiLoader({
-  //   id: 'google-map-script',
-  //   googleMapsApiKey: apiKeyValue
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: apiKeyValue
     
-  // })
+  })
 
   return (
     <>
-    <LoadScript googleMapsApiKey={apiKeyValue}>
+    {/* <LoadScript googleMapsApiKey={apiKeyValue}> */}
+    {isLoaded &&
       <GoogleMap  
       center={centerOfWorld} 
       zoom={1.6}
@@ -90,8 +91,8 @@ function ProfileGoogleMap(props) {
         }) : null}
         {/* <Marker position={position} /> */}
         {/* <Marker position={position2} /> */}
-      </GoogleMap>
-      </LoadScript>
+      </GoogleMap>}
+      {/* </LoadScript> */}
     </>
     )
 }

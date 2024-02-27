@@ -8,6 +8,10 @@ import {refreshList} from '../(pages)/feed/page.js';
 import {NextUIProvider} from "@nextui-org/react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import { CldUploadWidget } from 'next-cloudinary';
+import {useRouter} from "next/navigation";
+import { usePlacesWidget } from "react-google-autocomplete";
+import AutocompleteBox from './AutocompleteBox';
+
 
 const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY
 
@@ -39,10 +43,9 @@ const CreatePost = (props) => {
 
         client.createPost(postText, postLocation, postImage)
         .then(response => {
-          ;
-          
           alert("Post created successfully");
             console.log(response)
+            router.refresh();
         })
         .catch(error => {
             console.error(error)
@@ -81,17 +84,38 @@ const CreatePost = (props) => {
         //   hideModal();
         // }, [])
 
+        const { ref, autocompleteRef } = usePlacesWidget({
+          apiKey: apiKeyValue,
+          onPlaceSelected: (place) => {
+            setLocationName(place.formatted_address)
+            const placeId = place.place_id
+            handleLocation(placeId)
+          },
+          options: {
+            types: ["(regions)"],
+          },
+          defaultValue: "Amsterdam"
+        });
+
   return (
-  // isOpen &&  (  // <div className="bg-gray-100 z-0 w-screen h-screen absolute top-0">
-    <div className='fixed'>    
-<form id="form" className=" max-w-screen top-0 mx-auto h-96 w-96 shadow-xl rounded-lg  p-4 bg-gray-100" onSubmit={handleSubmit}>
+   isOpen &&  (   
+  //  <div className="bg-gray-100 z-0 w-screen h-screen absolute top-0">
+    <div className='fixed  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50'
+
+    >        
+<form id="form" className=" max-w-screen top-0 mx-auto h-96 w-96 shadow-xl rounded-lg  p-4 bg-gray-100 z-50" onSubmit={handleSubmit}
+>
   <div className="gap-4">
   <h2 className="text-center text-xl font-bold">Create Post</h2>
-  <label className="mt-4"> 
+  <label className="mt-4"  > 
     Location:
+  <script
+  type="text/javascript"
+  src={`https://maps.googleapis.com/maps/api/js?key=${apiKeyValue}&libraries=places`}
+  ></script> 
   <Autocomplete
   apiKey={apiKeyValue}
-  style={{ width: "90%" }}
+  style={{ width: "90%", z: 10 }}
   onPlaceSelected={(place) => {
     setLocationName(place.formatted_address)
     const placeId = place.place_id
@@ -100,8 +124,9 @@ const CreatePost = (props) => {
   options={{
     types: ["(regions)"],
   }}
-  defaultValue="Amsterdam"
-  />
+  defaultValue=""
+  /> 
+  <input ref={ref}/>
   </label>
   <label className="py-4">
   Description:
@@ -144,7 +169,7 @@ const CreatePost = (props) => {
 </div>
     // </div>
  )
-  
+  )
 }
 
 
