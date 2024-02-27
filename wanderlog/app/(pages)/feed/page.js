@@ -77,20 +77,14 @@ const Page = () => {
       }
 
 
-  <div className="md:hidden sticky top-0 z-50" id="navbar">
+  <div className="md:hidden sticky w-full top-0 z-50" id="navbar">
   <NavBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)} />
-  {hideMapInComponentTree &&
-    <div
-      className="bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
-      style={{
-        opacity: "0.5",
-      }}
-    ></div>
   
-      }
+  
+    
     </div>
 
-    
+
     <div className="hidden md:block sticky top-0 w-1/3  bg-white">
         <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)
 }/>
@@ -112,9 +106,9 @@ const Page = () => {
       )}
 
       {posts.length > 0 && (
-        <div className="ml-10 grid grid-cols-3 gap-10 h-full w-screen bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 h-full w-screen justify-items-center bg-white md:px-10">
           {posts.map((post) => (
-            <Post key={post.id} idValue={post.id} zIndex={1}  name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} rating={post.rating} isOwned={post.isOwned} hideGoogleMap={hideMapInComponentTree}/>
+            <Post key={post.id} idValue={post.id} zIndex={1}  name={post.username} profilePic={post.userImageURL} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} imageURL={post.postImage} rating={post.rating} isOwned={post.isOwned} hideGoogleMap={hideMapInComponentTree}/>
           ))}
         </div>
       )}

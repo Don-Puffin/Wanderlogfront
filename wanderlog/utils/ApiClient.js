@@ -152,17 +152,15 @@ async authUser () {
     });
   }
 
-  async updatePost(id, postText, postLocation, postImage){
+  async updatePost(id, rating){
     return await axios({
-      method: "POST", // Use the appropriate HTTP method
+      method: "PUT", // Use the appropriate HTTP method
       url: `${url}/post/update/${id}`,
       headers: {
         "Content-Type": "application/json",
       },
       data: {
-        postText: postText,
-        postLocation: postLocation,
-        postImage: postImage,
+          rating: rating
       },
       withCredentials: true
     })

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import {Tooltip, Button} from "@nextui-org/react";
 import Link from 'next/link'
 import { IoIosHelpCircleOutline } from "react-icons/io";
+import CookiePolicy from "../../components/CookiePopup"
 
 const RegisterForm = () => {
   const [password, setPassword] = useState('');
@@ -18,6 +19,7 @@ const RegisterForm = () => {
    const router = useRouter()
 
   const strength = {
+    0: '-rotate-90 h-10 w-10',
     1: '-rotate-90 h-10 w-10',
     2: 'rotate-0 h-10 w-10',
     3: 'rotate-90 h-10 w-10',
@@ -96,29 +98,54 @@ const RegisterForm = () => {
 
 
   return (
-    <div className="w-full mt-5 max-w-xs fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <form onSubmit={submitHandler} className="bg-white shadow-md rounded-xl px-8 pt-6 pb-8 mb-4 login-form">
-        <h2 className="text-center">Register</h2>
-        <h2 className="text-center mb-5">to add your location</h2>
-        <div className="username">
-          <div id="spinner" className="spinner"></div>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-            Username 
-            {/* <Tooltip
+
+      <div className="font-[sans-serif] bg-black text-[#333] md:h-screen">
+        <CookiePolicy />
+        <div className="grid md:grid-cols-2 items-center gap-8 h-full">
+          <div className=" p-4">
+            <img
+              src="/wanderlog logo3.png"
+              className="lg:max-w-[80%] w-full h-full object-contain block mx-auto"
+              alt="login-image"
+            />
+          </div>
+          
+          <div className="flex items-center md:p-8 p-6 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
+            
+          
+            {/* DELETE FORM */}
+            {/* <form className="max-w-lg w-full mx-auto" onSubmit={submitHandler}> */}
+              <div >
+                
+
+                
+              </div>
+              <div>
+                <h3 className="text-4xl font-extrabold">Register</h3>
+                <Tooltip
       content={
         <div className="bg-slate-200 px-1 py-2">
-          <div className="bg-slate-200 text-small font-bold">Custom Content</div>
-          <div className="text-tiny">How To Register</div>
-          <Link href="./help">Help Page</Link>
+          <div className="text-slate-700 text-small font-bold">How To Register</div>
+          <p className="text-slate-700 text-sm ">
+          <Link href="./help">Click For Help Page</Link>
+          </p>
         </div>
       }
     >
       <button>
       <IoIosHelpCircleOutline />
       </button>
-    </Tooltip> */}
+    </Tooltip>
+              <form onSubmit={submitHandler} className="bg-white  px-8 pt-6 pb-8 mb-4 login-form">
+        
+        <h2 className="text-center mb-5"></h2>
+        <div className="username">
+          <div id="spinner" className="spinner"></div>
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-xs mb-2" htmlFor="username">
+            Username 
+            
           </label>
           
           <input
@@ -129,7 +156,7 @@ const RegisterForm = () => {
           />
         </div>
         <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label className="block text-gray-700 text-xs mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -140,11 +167,16 @@ const RegisterForm = () => {
             onChange={handleChange}
             value={password}
           />
-          <p className="text-red-500 text-xs italic">Please choose a password.</p>
+          <p className="text-red-500 text-xs italic">Please choose a password (must include at least one lowercase, one uppercase, one number & one symbol)</p>
         </div>
         <div className="flex items-center">
         <div className="mx-auto mb-5">
-        <img src="/speedometer.png" className={strengthText}></img>
+          <p className="text-slate-500 text-xs text-center -ml-2 mb-2">Fair</p>
+          <div className="flex">
+          <p className="text-slate-500 text-xs mr-3 mt-3">Weak</p>
+        <img src="/pin2.png" className={strengthText}></img>
+        <p className="text-slate-500 text-xs ml-3 mt-3">Strong</p>
+        </div>
         </div>
 
         </div>
@@ -158,16 +190,30 @@ const RegisterForm = () => {
         <div className="flex items-center">
         
           <button
-            className="mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-[#333] hover:bg-[#222] focus:outline-none"
             type="submit"
           >
             Register
           </button>
         </div>
+
+       
       </form>
-      
-    </div>
-  );
+                
+                
+              </div>
+              
+    
+              
+            {/* </form> */}
+
+
+{/* DELETE FORM */}
+
+          </div>
+        </div>
+      </div>
+);
 };
 
 export default RegisterForm;

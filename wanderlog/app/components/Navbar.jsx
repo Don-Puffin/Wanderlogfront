@@ -47,44 +47,59 @@ const NavBar = (props) => {
 
   return (
     <>
-      <div className="sticky top-0 left-0 max-h-20 w-full bg-gray-100 shadow-xl rounded-lg text-gray-900" id="navbar">
-        <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 py-2">
-          <Link href="/">
+      <div className="sticky top-0 left-0  max-h-1/6 min-w-screen bg-black shadow-xl rounded-lg text-gray-900" id="navbar">
+      <Link href="/">
             <img
-              className="h-auto w-24 cursor-pointer"
-              src="wanderloglogobw.png"
+              className="p-3 h-auto pt-6 w-40 mx-auto cursor-pointer"
+              src="wanderlog logo3.png"
               alt="wanderlog logo"
             />
           </Link>
-          <div className="flex space-x-4">
-            <Link
-              href="/profile"
-              className={`flex items-center text-lg text-black p-2 rounded-xl hover:bg-gray-200`}
-            >
-              <CgProfile size={24} />
-              <span className="ml-2"></span>
+        <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 ">
+       
+        <div className="flex ">
+          
+          
+        <Link href="/profile" className={`flex max-h-14 text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/profile" ? "#ffffff" : "inherit"}}>             
+              <CgProfile color="white" size={30}  className="transition-transform hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/profile" ? "#000000" : "#ffffff" }} />
+              
             </Link>
             <button
               onClick={openCloseModal}
-              className={`flex items-center bg-grey-300 text-lg text-black p-2 rounded-xl hover:bg-gray-200`}
-            >
-              <IoMdAddCircleOutline size={24} />
-              <span className="ml-2"></span>
+               className={`flex text-xl text-black mb-5 p-4 rounded-xl h-full`}>              
+            <IoMdAddCircleOutline color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: "300ms"}} />
             </button>
             {/* Add other navbar links/buttons */}
+          
+            <Link href="/feed" className={`flex max-h-14 text-black p-4 rounded-xl hover:!bg-white`} style={{ backgroundColor: pathname === "/feed" ? "#ffffff" : "inherit"}}> 
+           <MdOutlinePhotoCameraBack color="white" size={30} className="transition-transform hover:text-black hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/feed" ? "#000000" : "#ffffff" }} />
+    </Link>
+
+    <Link href="/map" className={`flex max-h-14 text-lg text-black p-4 rounded-xl hover:!bg-gray-200 `} style={{ backgroundColor: pathname === "/map" ? "#ffffff" : "inherit"}}>
+        <GrMapLocation color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms', color: pathname === "/map" ? "#000000" : "#ffffff" }}/>
+    </Link> 
+
+    <Link href="/help" className={`flex max-h-14 text-xl text-black mb-5 p-4 rounded-xl hover:bg-gray-200 `} style={{ backgroundColor: pathname === "/help" ? "#ffffff" : "inherit"}}> 
+        <MdHelpOutline color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms', color: pathname === "/help" ? "#000000" : "#ffffff" }}/>
+    </Link>
+          
           </div>
-        </div>
+        
+
+
         {/* Add other navbar links/buttons */}
         <button
           onClick={handleLogout}
-          className="bottom-0 flex text-xl text-gray-900 mb-5 p-2 rounded-xl hover:bg-gray-200 cursor-pointer"
+          className="bottom-0 flex max-h-14 text-xl text-gray-900 mb-5 p-2 rounded-xl hover:bg-gray-200 cursor-pointer"
+          
         >
-          <GiPowerButton size={24} />
+          <GiPowerButton color="white" size={30} />
           <span className="ml-2"></span>
         </button>
       </div>
-      <div className={"w-full"} id="modal-container">
+      <div className={"w-screen"} id="modal-container">
         <CreatePost isOpen={modalOpen} setIsOpen={setModalOpen} />
+      </div>
       </div>
     </>
   );

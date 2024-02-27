@@ -59,7 +59,7 @@ const CreatePost = (props) => {
   }
 
     const handleSubmit = async (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         
         const postLocation = {name: "", lat: 0, long: 0, rating: 0}
         postLocation.name = locationName
@@ -74,9 +74,8 @@ const CreatePost = (props) => {
         .then(response => {
             alert("Post created successfully");
             console.log(response)
-            router.push('/feed')
-            router.refresh();
-        })
+            window.location.reload();
+          })
         .catch(error => {
             console.error(error)
         })
@@ -118,58 +117,56 @@ const CreatePost = (props) => {
    isOpen &&  (   
     <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' id="modal"
 
-    >
-  <button onClick={openCloseModal}>
-   <FaRegWindowClose className="text-black hover:text-red"/>
-  </button>      
-<form id="form" className=" max-w-screen top-0 mx-auto h-96 w-96 shadow-xl rounded-lg  p-4 bg-gray-100 z-50" onSubmit={handleSubmit}
+    >    
+<form id="form" className=" max-w-screen top-0 mx-auto h-4/12 md:w-96 shadow-xl rounded-lg p-4 bg-black text-white z-50" onSubmit={handleSubmit}
 >
-  <div className="gap-4">
+<button type="button" onClick={openCloseModal} >
+   <FaRegWindowClose className="text-white text-2xl hover:text-red"/>
+  </button>  
+  <div className="flex flex-col items-center">
+
   <h2 className="text-center text-xl font-bold">Create Post</h2>
 
-  <label className="mt-4" for="location" > 
+  <label className="mt-2" for="location" > 
     Location:
     </label>
   {isLoaded && <Autocomplete onLoad={onLoadFunction} onPlaceChanged={onPlaceChangedFunction}> 
-    <input id="location-input" name="location" type="text" placeholder="Amsterdam"></input>
+    <input id="location-input" name="location" type="text" placeholder="Where have you been?" className="rounded-md my-1 p-1"></input>
   </Autocomplete>
   }
-  <label className="py-4">
+  <label className="my-2 text-center">
   Description:
-    <textarea type="text" name="text" className="p-4 w-80"/>
+    <textarea type="text" name="text" className="p-4 w-80 mt-1 rounded-md" placeholder="What was it like?"/>
   </label>
+  <div className="flex flex-row justify-around">
   <label>
-    <br/>
     Rating:
-    <input type="number" name="rating" />
+    <select type="number" name="rating" className="border-gray-200 border-1 rounded-xl w-10 p-2 mx-2 relative">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+    </select>  
   </label>
-  <label>
   <CldUploadWidget 
       onSuccess={(results, error) => {    
         if (error) {
           console.log(error);
         }
-        console.log(results.event);
-        console.log('URL:', results.info.url);
-        console.log(currentProfile.imageURL)
-        client.editUserProfile(results.info.url)
-        .then(response => {
-          console.log('Profile picture updated successfully:', response.data);})
-        .catch(error => {
-          console.error("Error updating profile picture", error)
-        })
+        setImageURL(results.info.url)
       }}
       uploadPreset="wanderlog" >
   {({ open }) => {
     return (
-      <button className="mt-2 w-22 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => open()}>
-        Upload
+      <button type="button" className="my-auto w-22 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-md text-black ml-3 px-6 p-2" onClick={() => open()}>
+        Upload image
       </button>
     );
   }}
 </CldUploadWidget>
-  <input type="submit" value="Submit" className="bottom border-2 border-black hover:bg-black cursor-pointer text-black hover:text-white font-bold py-2 px-4 rounded"/>
-  </label>
+</div>
+  <input type="submit" value="Submit" className="bottom border-2 border-white hover:bg-white cursor-pointer text-white hover:text-black font-bold py-2 my-4 px-4 rounded-lg "/>
   </div>
 </form>
 </div>

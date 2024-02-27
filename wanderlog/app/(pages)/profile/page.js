@@ -121,25 +121,35 @@ const router = useRouter();
   // const [currentUser, setCurrentUser] = useState (mapUser)
   // const [userLink, setUserLink] = useState(`https://wanderlogfront.vercel.app/${currentUser}`);
   return (
-
+    <div className="flex flex-col md:flex-row  ">
     
-<div className="flex flex-col md:flex-row  ">
-  <div className="md:hidden sticky top-0 z-50" id="navbar">
-  <NavBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)} />
-  {hideMapInComponentTree &&
-    <div
-      className="bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
-      style={{
-        opacity: "0.5",
-      }}
-    ></div>
-  
+
+      {hideMapInComponentTree &&
+              <div
+              className=" bg-gray-500 fixed top-0 left-0 right-0 bottom-0"
+              style={{
+                opacity: "0.5",
+                
+              }}
+              id= "gray-overlay"
+            ></div>
       }
+
+
+  <div className="md:hidden sticky w-full top-0 z-50" id="navbar">
+  <NavBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)} />
+  
+  
+    
     </div>
+
+
     <div className="hidden md:block sticky top-0 w-1/3  bg-white">
         <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)
 }/>
         
+        </div>
+      <div>
         </div>
 
         <div className="h-full w-screen bg-white">
@@ -174,7 +184,6 @@ const router = useRouter();
         console.log(results.event);
         console.log('URL:', results.info.url);
         console.log(currentProfile.imageURL)
-        refreshList();
         client.editUserProfile(results.info.url)
         .then(response => {
           console.log('Profile picture updated successfully:', response.data);})
@@ -230,7 +239,7 @@ const router = useRouter();
   <p onClick={toggleExpanded} className="text-xs text-center cursor-pointer text-blue-500 mt-5 mx-5">
 { !expanded ? 'See More' : 'See Less'}
 </p> 
-<p className="mt-6 text-center text-sm">Your URL - https://wanderlogfront.vercel.app/{currentProfile.username}</p>
+<p className="mt-6 text-center text-sm"><a href={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>Your URL - https://wanderlogfront.vercel.app/{currentProfile.username}</a></p>
 
 <div className="text-center mt-2">
 <EmailShareButton className="ml-1" url={currentProfile.username}>
