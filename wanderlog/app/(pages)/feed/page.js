@@ -99,9 +99,7 @@ const Page = () => {
       {posts.length > 0 && (
         <div className="grid grid-cols-3 gap-10 h-full w-screen bg-white">
           {posts.map((post) => (
-            <Post key={post._id} zIndex={1}  name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} 
-              hideGoogleMap={hideMapInComponentTree}
-            />
+            <Post key={post._id} zIndex={1}  name={post.username} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} rating={post.rating} hideGoogleMap={hideMapInComponentTree}/>
           ))}
         </div>
       )}

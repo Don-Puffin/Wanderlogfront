@@ -5,12 +5,27 @@ import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import { CldUploadWidget } from 'next-cloudinary';
+import {
+  EmailShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
+
+import {
+  EmailIcon,
+  FacebookIcon,
+  XIcon,
+  WhatsappIcon,
+} from "react-share";
 
 import axios from 'axios';
 
 
 
 const Page = () => {
+
+  
 
 const router = useRouter();
 
@@ -103,7 +118,8 @@ const router = useRouter();
     return <div className="text-black mx-auto p-10">Authenticating...</div>;
   }
 
-
+  // const [currentUser, setCurrentUser] = useState (mapUser)
+  // const [userLink, setUserLink] = useState(`https://wanderlogfront.vercel.app/${currentUser}`);
   return (
 
     
@@ -198,6 +214,22 @@ const router = useRouter();
   <p onClick={toggleExpanded} className="text-xs text-center cursor-pointer text-blue-500 mt-5 mx-5">
 { !expanded ? 'See More' : 'See Less'}
 </p> 
+<p className="mt-6 text-center text-sm">Your URL - https://wanderlogfront.vercel.app/{currentProfile.username}</p>
+
+<div className="text-center mt-2">
+<EmailShareButton className="ml-1" url={currentProfile.username}>
+        <EmailIcon size={18} round={true}/>
+      </EmailShareButton>
+      <FacebookShareButton className="ml-1" url={currentProfile.username}>
+      <FacebookIcon size={18} round={true} />
+      </FacebookShareButton>
+      <TwitterShareButton className="ml-1" url={currentProfile.username}>
+      <XIcon size={18} round={true}/>  
+      </TwitterShareButton>
+      <WhatsappShareButton className="ml-1" url={currentProfile.username}>
+      <WhatsappIcon size={18} round={true}/>  
+      </WhatsappShareButton>
+      </div>
 
       <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
         <li className="flex flex-col items-center justify-around">
