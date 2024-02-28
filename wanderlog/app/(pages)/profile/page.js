@@ -248,22 +248,22 @@ const router = useRouter();
 <div className="text-center mt-2">
 <EmailShareButton subject="Wanderlog" body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
 
-I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do." className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
         <EmailIcon size={24} round={true}/>
       </EmailShareButton>
       <FacebookShareButton className="ml-1" subject="Wanderlog" body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
 
-I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do." url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
       <FacebookIcon size={24} round={true} />
       </FacebookShareButton>
       <TwitterShareButton className="ml-1"  body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
 
-I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do." url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
       <XIcon size={24} round={true}/>  
       </TwitterShareButton>
       <WhatsappShareButton className="ml-1"  body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
 
-I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do." url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
       <WhatsappIcon size={24} round={true}/>  
       </WhatsappShareButton>
       </div>
