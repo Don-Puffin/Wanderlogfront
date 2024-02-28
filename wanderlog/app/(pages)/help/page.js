@@ -69,7 +69,7 @@ const FAQAccordion = () => {
       <AccordionItem
         question="What is Wanderlog? "
         answer="Wanderlog is a vibrant community where you can like, share, and comment on others' posts while exploring their profiles, maps, reviews. Explore our site, see the places you really want to visit and share your experiences to inspire others."
-        image="/helpImage1.png"
+        image="/helpImage.png"
       />
       <AccordionItem
         question="How do I sign in?"
@@ -98,6 +98,7 @@ const FAQAccordion = () => {
         image="/helpImage1.png"
 
       />
+      <Link className="text-slate-500 text-base"href="/feed">Back</Link>
          
             
           </div>

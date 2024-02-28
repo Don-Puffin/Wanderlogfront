@@ -17,14 +17,14 @@
 }
 
 @media (max-width: 1023px) {
-  body, #blackback {
+  #body, #blackback {
     height: 100vh;
   }
 
 }
 
 
-body, #blackback {
+#body, #blackback {
   height: 100vh;
 }
 
@@ -105,3 +105,5 @@ body, #blackback {
       #navabr {
         z-index: 1000;
       }
+
+    

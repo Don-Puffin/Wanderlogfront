@@ -85,7 +85,7 @@ const Page = () => {
     </div>
 
 
-    <div className="hidden md:block sticky top-0 w-1/3  bg-white">
+    <div className="hidden md:block sticky top-0 w-1/4 bg-white">
         <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)
 }/>
         
