@@ -7,16 +7,22 @@ import {Tooltip, Button} from "@nextui-org/react";
 import Link from 'next/link'
 import { IoIosHelpCircleOutline } from "react-icons/io";
 import CookiePolicy from "../../components/CookiePopup"
+import toast, {Toaster} from "react-hot-toast";
 
 const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [strengthText, setStrengthText] = useState('rotate-0 h-10 w-10');
+  const [notifText, setNotifText] = useState('');
+  const [notifDisplay, setNotifDisplay] = useState('');
   const [barsClass, setBarsClass] = useState('');
+  const [showPasswordError, setPasswordError] = useState(false);
   const client = new ApiClient(
     () => token,
     () => logout()
    );
    const router = useRouter()
+
+  const notify = (text) => toast(text);
 
   const strength = {
     0: '-rotate-90 h-10 w-10',
@@ -80,15 +86,21 @@ const RegisterForm = () => {
     setDisabled(true);
     client.register(e.target.username.value, e.target.password.value)
     .then(data => {
-    console.log(data.status)
     if (data.status === 201) {
+      notify(data.message);
       router.push("/feed");
     } else {      
-      alert(data.message); // Display message if login unsuccessful
+      // setNotifDisplay(true);
+      // setNotifText(data.message); // Display message if login unsuccessful
+      notify(data.message);
+      setPasswordError(true);
     }
     })
     .catch(() => {
-    alert("An error occurred."); // Handle error if request fails
+      // setNotifDisplay(true);
+      // setNotifText(data.message); // Handle error if request fails
+      notify(data.message)
+      setPasswordError(true);
     })
     .finally(() => {
     setDisabled(false); // Re-enable the login button
@@ -101,6 +113,7 @@ const RegisterForm = () => {
 
       <div className="font-[sans-serif] bg-black text-[#333] md:h-screen">
         <CookiePolicy />
+        {/* <Toast notifText={notifText} isVisible={notifDisplay}></Toast> */}
         <div className="grid md:grid-cols-2 items-center gap-8 h-full">
           <div className=" p-4">
             <img
@@ -121,8 +134,7 @@ const RegisterForm = () => {
                 
               </div>
               <div>
-                <h3 className="text-4xl font-extrabold">Register</h3>
-                <Tooltip
+                <h3 className="text-4xl font-extrabold">Register<span className="text-lg hover:text-green-500">  <Tooltip
       content={
         <div className="bg-slate-200 px-1 py-2">
           <div className="text-slate-700 text-small font-bold">How To Register</div>
@@ -135,7 +147,8 @@ const RegisterForm = () => {
       <button>
       <IoIosHelpCircleOutline />
       </button>
-    </Tooltip>
+    </Tooltip></span></h3>
+              
               <form onSubmit={submitHandler} className="bg-white  px-8 pt-6 pb-8 mb-4 login-form">
         
         <h2 className="text-center mb-5"></h2>
@@ -160,14 +173,16 @@ const RegisterForm = () => {
             Password
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline
+            ${showPasswordError ? 'border-red-300': ''}`}
             id="password"
             type="password"
             placeholder="******************"
             onChange={handleChange}
             value={password}
           />
-          <p className="text-red-500 text-xs italic">Please choose a password (must include at least one lowercase, one uppercase, one number & one symbol)</p>
+          {showPasswordError && (<p className="text-red-500 text-xs italic">Please choose a password (must include at least one lowercase, one uppercase, one number & one symbol)</p>
+          )}
         </div>
         <div className="flex items-center">
         <div className="mx-auto mb-5">
@@ -212,6 +227,8 @@ const RegisterForm = () => {
 
           </div>
         </div>
+        <Toaster position="bottom-right"/>
+
       </div>
 );
 };

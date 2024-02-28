@@ -87,7 +87,7 @@ const Post = (props) => {
 
 
   return (
-    <div  className="min-w-72 sm:max-w-11/12 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
+    <div  className="min-w-96 sm:max-w-11/12 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-36 overflow-hidden">
       {
         props.hideGoogleMap && <img className="w-full h-36 object-cover object-center" src={`https://a.ccdn.es/cnet/contents/media/own/2022/6/1299003.jpg/900x505cut/`} alt="post image" />
@@ -154,7 +154,7 @@ const Post = (props) => {
       </div>
       {/* button renders conditionally depending on if owner */}
       {showPhoto? (
-      <img className="w-72" src={props.imageURL} alt='travel_photo' />
+      <img className="w-10/12 mx-auto m-8 rounded-xl drop-shadow-xl" src={props.imageURL} alt='travel_photo' />
       ): (null)}
       
       

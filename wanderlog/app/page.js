@@ -7,10 +7,10 @@ import {NextUIProvider} from "@nextui-org/react";
 
 const page = () => {
   return (
-    // <NextUIProvider>
-    <body>
+    
+    <div id="body">
       <div id="blackback" className="h-full">
-        <div>
+        {/* <div> */}
         <div className="ml-14 flex flex-col lg:flex-row md:flex-col-medium p-2">   
                  
             {/* Spinning Globe */}
@@ -45,10 +45,9 @@ const page = () => {
               </div>
             </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
-    </body>
-    // </NextUIProvider>
+    </div>
   )
 }
 

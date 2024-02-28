@@ -5,6 +5,8 @@ import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import { CldUploadWidget } from 'next-cloudinary';
+import toast, {Toaster} from "react-hot-toast";
+
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -51,6 +53,7 @@ const router = useRouter();
   const [expanded, setExpanded] = useState(false);
   const [hideMapInComponentTree, setHideMapInComponentTree] = useState(false);
 
+  const notify = (text) => toast(text);
 
   const toggleExpanded = () => {
     setExpanded(!expanded);
@@ -61,7 +64,6 @@ const router = useRouter();
       .then(response => {
         if (response.status === 200) {
           setIsAuthenticated(true);
-          // just changed this - Alfie
           refreshList();
         } else {
           router.push('/');
@@ -107,10 +109,12 @@ const router = useRouter();
     client.editUserProfile(currentProfile.imageURL, currentProfile.bio, currentProfile.userLocation)
       .then(response => {
         console.log('Profile updated successfully:', response.data);
+        notify(response.message);
         setIsEditMode(!isEditMode);
       })
       .catch(error => {
         console.error('Error updating profile:', error);
+        notify(response.message);
       });
   };
 
@@ -144,7 +148,7 @@ const router = useRouter();
     </div>
 
 
-    <div className="hidden md:block sticky top-0 w-1/3  bg-white">
+    <div className="hidden md:block sticky top-0 w-1/4 bg-white">
         <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)
 }/>
         
@@ -172,7 +176,7 @@ const router = useRouter();
         )
       }
       </div>
-      <div className="mx-auto w-32 h-32 left-0 mt-16 border-4 border-green-300 rounded-full overflow-hidden">
+      <div className="mx-auto w-32 h-32 left-0 mt-16 border-4 drop-shadow-lg border-white rounded-full overflow-hidden">
         <img className="object-cover object-center h-32" src={currentProfile.imageURL} />
       </div>
       
@@ -180,29 +184,29 @@ const router = useRouter();
       onSuccess={(results, error) => {    
         if (error) {
           console.log(error);
+          notify("Error updating profile picture. Please try again later.")
         }
-        console.log(results.event);
-        console.log('URL:', results.info.url);
-        console.log(currentProfile.imageURL)
         client.editUserProfile(results.info.url)
         .then(response => {
-          console.log('Profile picture updated successfully:', response.data);})
+          console.log("Profile picture updated successfully!", response.data)
+          notify('Profile picture updated successfully!');})
         .catch(error => {
-          console.error("Error updating profile picture", error)
+          console.error("Error updating profile picture.", error)
+          notify("Error updating profile picture. Please try again later.")
         })
         refreshList();
       }}
       uploadPreset="wanderlog" >
   {({ open }) => {
     return (
-      <button className="w-22 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => open()}>
+      <button className="w-22 border border-grey-500 block mx-auto mt-3 rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={() => open()}>
         Upload
       </button>
     );
   }}
 </CldUploadWidget>
-      <div className="text-center  mt-2">
-        <h2 className="font-extralight text-base text-gray-500">{currentProfile.username}</h2>
+      <div className="text-center mt-6">
+        <h2 className="text-xl text-gray-500">{currentProfile.username}</h2>
         <p className="font-semibold"></p>
       </div>
       <div>
@@ -216,7 +220,7 @@ const router = useRouter();
   id="textBox"
   className="mx-auto placeholder-top min-h-6 m-5"
   placeholder="Enter location"
-  name="location"
+  name="userLocation"
   value={currentProfile.userLocation}
   onChange={handleChange} 
 />
@@ -232,27 +236,35 @@ const router = useRouter();
 </>
       ) : (
         <>
-      <div className="text-xs text-center mt-5 mx-5">{currentProfile.userLocation}</div>
-     <p className={`text-xs text-center mt-5 py-2 mx-5 ${expanded ? 'expanded-bio' : 'collapsed-bio'}`}>
+      <div className="text-lg text-center mt-5 mx-5">{currentProfile.userLocation}</div>
+     <p className={`text-base text-center mt-5 py-2 mx-5 ${expanded ? 'expanded-bio' : 'collapsed-bio'}`}>
       {expanded ? currentProfile.bio : (currentProfile.bio ? currentProfile.bio?.substring(0, 200) + '...' : "" )}
 </p>
-  <p onClick={toggleExpanded} className="text-xs text-center cursor-pointer text-blue-500 mt-5 mx-5">
+  <p onClick={toggleExpanded} className="text-xs text-center cursor-pointer text-gray-500 mt-5 mx-5">
 { !expanded ? 'See More' : 'See Less'}
 </p> 
-<p className="mt-6 text-center text-sm"><a href={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>Your URL - https://wanderlogfront.vercel.app/{currentProfile.username}</a></p>
+<p className="mt-6 mb-3 text-center text-sm"><a href={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>URL: https://wanderlogfront.vercel.app/{currentProfile.username}</a></p>
 
 <div className="text-center mt-2">
-<EmailShareButton className="ml-1" url={currentProfile.username}>
-        <EmailIcon size={18} round={true}/>
+<EmailShareButton subject="Wanderlog" body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
+
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+        <EmailIcon size={24} round={true}/>
       </EmailShareButton>
-      <FacebookShareButton className="ml-1" url={currentProfile.username}>
-      <FacebookIcon size={18} round={true} />
+      <FacebookShareButton className="ml-1" subject="Wanderlog" body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
+
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+      <FacebookIcon size={24} round={true} />
       </FacebookShareButton>
-      <TwitterShareButton className="ml-1" url={currentProfile.username}>
-      <XIcon size={18} round={true}/>  
+      <TwitterShareButton className="ml-1"  body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
+
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+      <XIcon size={24} round={true}/>  
       </TwitterShareButton>
-      <WhatsappShareButton className="ml-1" url={currentProfile.username}>
-      <WhatsappIcon size={18} round={true}/>  
+      <WhatsappShareButton className="ml-1"  body="I wanted to share some exciting news with you—I've recently signed up for a fantastic new travel-sharing service called Wanderlog. It's a platform where you can document your travels, share recommendations, and connect with fellow adventurers.
+
+I thought you might be interested in joining me on Wanderlog! It would be a great way for us to stay connected and share our travel experiences with each other. Plus, I know you always have fantastic recommendations for places to visit and things to do."className="ml-1" url={`https://wanderlogfront.vercel.app/${currentProfile.username}`}>
+      <WhatsappIcon size={24} round={true}/>  
       </WhatsappShareButton>
       </div>
 
@@ -308,6 +320,8 @@ const router = useRouter();
         
    
         </div>
+        <Toaster position="bottom-right"/>
+
     </div>
   );
   }

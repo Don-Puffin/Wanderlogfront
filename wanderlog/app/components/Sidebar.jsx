@@ -74,10 +74,10 @@ import CreatePost from "./CreatePost";
            <div className="m-2 my-auto" style={{ color: pathname === "/feed" ? "#000000" : "inherit"}}> Feed</div>
     </Link>
 
-    <Link href="/map" className={`flex max-h-14 text-xl text-white p-4 rounded-xl hover:bg-white hover:text-black`} style={{ backgroundColor: pathname === "/map" ? "#ffffff" : "inherit"}}>
-        <GrMapLocation color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms', color: pathname === "/map" ? "#000000" : "inherit" }}/>
-        <div className="m-2 my-auto"> Map</div>
-    </Link> 
+    <Link href="/map" className={`flex max-h-14 text-xl text-white p-4 rounded-xl hover:text-black hover:bg-white `} style={{ backgroundColor: pathname === "/map" ? "#ffffff" : "inherit"}}>             
+              <GrMapLocation size={30}  className="transition-transform hover:text-black  hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/map" ? "#000000" : "inherit" }} />
+              <div className="m-2 my-auto" style={{ color: pathname === "/map" ? "#000000" : "inherit"}}> Top Rated</div>
+            </Link>
 
     <Link href="/help" className={`flex max-h-14 text-xl text-white mb-5 p-4 rounded-xl hover:bg-white hover:text-black`} style={{ backgroundColor: pathname === "/help" ? "#ffffff" : "inherit"}}> 
         <MdHelpOutline color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms', color: pathname === "/help" ? "#000000" : "inherit", textcolor: pathname === "/help" ? "#000000" : "inherit"  }}/>

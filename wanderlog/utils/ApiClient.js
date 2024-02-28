@@ -29,8 +29,9 @@ export default class ApiClient {
       return response.data; // return response data containing status and message
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
-    });
+      console.error(error.response.data)
+      return error.response.data; // re-throw the error to be caught by the caller
+      });
   }
 
   async register(username, password) {
@@ -48,10 +49,11 @@ export default class ApiClient {
     })
   .then(response => {
     console.log(response.data);
-  return response.data; // return response data containing status and message
+    return response.data; // return response data containing status and message
   })
   .catch(error => {
-  throw error; // re-throw the error to be caught by the caller
+    console.error(error.response.data)
+    return error.response.data; // re-throw the error to be caught by the caller
   });
 }
 
@@ -68,8 +70,9 @@ async logout() {
     console.log(response.data);
     return response.data;
   }).catch(error => {
-    throw error;
-  })
+    console.error(error.response.data)
+    return error.response.data; // re-throw the error to be caught by the caller
+})
 }
 
 
@@ -145,10 +148,11 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-    return response.data; // return response data containing status and message
+      return response.data; // return response data containing status and message
     })
     .catch(error => {
-    throw error; // re-throw the error to be caught by the caller
+      console.error(error.response.data)
+      return error.response.data; // re-throw the error to be caught by the caller
     });
   }
 
@@ -169,7 +173,8 @@ async authUser () {
     return response.data; // return response data containing status and message
     })
     .catch(error => {
-    throw error; // re-throw the error to be caught by the caller
+      console.error(error.response.data)
+      return error.response.data; // re-throw the error to be caught by the caller
     });
   }
 
@@ -187,7 +192,8 @@ async authUser () {
     return response.data; // return response data containing status and message
     })
     .catch(error => {
-    throw error; // re-throw the error to be caught by the caller
+      console.error(error.response.data)
+      return error.response.data; // re-throw the error to be caught by the caller
     });
   }
 
@@ -247,7 +253,8 @@ async authUser () {
       console.log(response.data);
       return response.data
     }).catch(error => {
-      throw error;
+      console.error(error.response.data)
+      return error.response.data; // re-throw the error to be caught by the caller
     })
   }
 
@@ -257,6 +264,25 @@ async authUser () {
     return await axios({
       method: "GET", // Use the appropriate HTTP method
       url: `${url}/map/visitedPlaces/${reqId}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true
+    })
+    .then(response => {
+      console.log(response.data);
+      return response.data; // return response data
+    })
+    .catch(error => {
+      throw error; // re-throw the error to be caught by the caller
+    });
+  }
+
+
+  async getTopRatedLocations(id) {
+    return await axios({
+      method: "GET", // Use the appropriate HTTP method
+      url: `${url}/map/topRatedPlaces`,
       headers: {
         "Content-Type": "application/json",
       },
