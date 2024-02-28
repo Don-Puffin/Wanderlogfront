@@ -14,7 +14,7 @@ function Modalbutton() {
     <>
   
       <Button onPress={onOpen} >Open Modal</Button>
-      <Modal  id="Modal" isOpen={isOpen}  placement={modalPlacement} backdrop={backdrop}>
+      <Modal  id="Modal" isOpen={isOpen}  placement={modalPlacement} backdrop={backdrop} className={"z-50"}>
         <ModalContent>
           {(onClose) => (
             <>

@@ -52,49 +52,62 @@ import CreatePost from "./CreatePost";
 
   return (
     <>
-      <div className="sticky top-0 w-4/6 bg-gray-100  ml-0 shadow-xl rounded-lg text-gray-900">
-<div className =" flex flex-col ">
-<img className="h-auto w-3/4 ml-4 mt-4 p-2 transition-transform hover:scale-110" src= "wanderloglogobw.png" alt="wanderlog logo"/>
+      <div className="sticky  top-0 w-full h-screen bg-black  ml-0 shadow-xl rounded-lg" id="sidebar">
+<div className =" flex flex-col text-xl ">
+<img className="h-auto w-3/4 ml-4 mt-4 p-2 transition-transform hover:scale-110" src= "wanderlog logo3.png" alt="wanderlog logo"/>
       
       
-    <Link href="/profile" className={`mt-4 flex text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/profile" ? "#E5E7EB" : "inherit"}}> 
-        <CgProfile size={40} className="transition-transform hover:scale-110"  style={{ transitionDuration: '300ms' }}/> 
-        <div className="m-2 my-auto">Profile</div>
+<Link href="/profile" className={`flex max-h-14 text-xl text-white p-4 rounded-xl hover:text-black hover:bg-white `} style={{ backgroundColor: pathname === "/profile" ? "#ffffff" : "inherit"}}>             
+              <CgProfile size={30}  className="transition-transform hover:text-black  hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/profile" ? "#000000" : "inherit" }} />
+              <div className="m-2 my-auto" style={{ color: pathname === "/profile" ? "#000000" : "inherit"}}> Profile</div>
+            </Link>
+            <button
+              onClick={openCloseModal}
+               className={`flex text-xl text-white p-4 rounded-xl h-full hover:text-black hover:bg-white`}>              
+            <IoMdAddCircleOutline color="inherit" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: "300ms"}} />
+            <div className="m-2 my-auto"> Add Post</div>
+            </button>
+            {/* Add other navbar links/buttons */}
+          
+            <Link href="/feed" className={`flex max-h-14 text-white p-4 rounded-xl hover:bg-white hover:text-black`} style={{ backgroundColor: pathname === "/feed" ? "#ffffff" : "inherit"}}> 
+           <MdOutlinePhotoCameraBack color="white" size={30} className="transition-transform hover:text-black hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/feed" ? "#000000" : "inherit" }} />
+           <div className="m-2 my-auto" style={{ color: pathname === "/feed" ? "#000000" : "inherit"}}> Feed</div>
     </Link>
 
-    <button onClick={openCloseModal} className={`flex bg-grey-300 text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/add-post" ? "##E5E7EB" : "inherit"}} >
-        <IoMdAddCircleOutline size={40} className="transition-transform hover:scale-110" 
-          style={{ transitionDuration: '300ms' }} />
-        <div className="m-2 my-auto">Add Post</div>
-    </button>
-
-    {/* feed */}
-    <Link href="/feed" className={`flex text-lg text-black p-4 rounded-xl hover:!bg-gray-200`} style={{ backgroundColor: pathname === "/feed" ? "#E5E7EB" : "inherit"}}> 
-           <MdOutlinePhotoCameraBack size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: "300ms" }} />
-        <div className="m-2 my-auto"> Feed</div>
-    </Link>
-
-    <Link href="/map" className={`flex text-lg text-black p-4 rounded-xl hover:!bg-gray-200 `} style={{ backgroundColor: pathname === "/map" ? "#E5E7EB" : "inherit"}}>
-        <GrMapLocation size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms' }}/>
+    <Link href="/map" className={`flex max-h-14 text-xl text-white p-4 rounded-xl hover:bg-white hover:text-black`} style={{ backgroundColor: pathname === "/map" ? "#ffffff" : "inherit"}}>
+        <GrMapLocation color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms', color: pathname === "/map" ? "#000000" : "inherit" }}/>
         <div className="m-2 my-auto"> Map</div>
     </Link> 
 
-    <Link href="/help" className={`flex text-xl text-black mb-5 p-4 rounded-xl hover:bg-gray-200 `} style={{ backgroundColor: pathname === "/help" ? "#E5E7EB" : "inherit"}}> 
-        <MdHelpOutline size={40} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms' }}/>
+    <Link href="/help" className={`flex max-h-14 text-xl text-white mb-5 p-4 rounded-xl hover:bg-white hover:text-black`} style={{ backgroundColor: pathname === "/help" ? "#ffffff" : "inherit"}}> 
+        <MdHelpOutline color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: '300ms', color: pathname === "/help" ? "#000000" : "inherit", textcolor: pathname === "/help" ? "#000000" : "inherit"  }}/>
         <div className="m-2 my-auto"> Help</div>
     </Link>
-    <button onClick={handleLogout} className="bottom flex text-xl text-gray-900 mb-5 p-4 rounded-xl hover:bg-gray-200 cursor-pointer">
-<GiPowerButton size={30} className="transition-transform hover:scale-110" 
-    style={{ transitionDuration: '300ms' }}/>
-    <div className="m-2 my-auto text-md cursor-pointer" > Logout</div>
-    </button>
-    </div>
-    </div>
-    <div className={"w-full relative"}>
-    <CreatePost isOpen={modalOpen}/>
+          
+          
+        
+
+
+        {/* Add other navbar links/buttons */}
+        <button
+          onClick={handleLogout}
+          className=" flex max-h-14 text-xl text-white mb-5 p-2 rounded-xl hover:bg-white hover:text-black cursor-pointer"
+          
+        >
+          <GiPowerButton color="inherit" size={30} />
+          <span className="ml-"></span>
+          <div className="m-2 my-auto"> Logout</div>
+        </button>
+      </div>
+      <div className={"w-screen"} id="modal-container">
+        <CreatePost isOpen={modalOpen} setIsOpen={setModalOpen} />
+        </div>
     </div>
     </>
   );
 };
 
 export default SideBar;
+
+
+

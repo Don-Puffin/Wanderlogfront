@@ -152,17 +152,15 @@ async authUser () {
     });
   }
 
-  async updatePost(id, postText, postLocation, postImage){
+  async updatePost(id, rating){
     return await axios({
-      method: "POST", // Use the appropriate HTTP method
+      method: "PUT", // Use the appropriate HTTP method
       url: `${url}/post/update/${id}`,
       headers: {
         "Content-Type": "application/json",
       },
       data: {
-        postText: postText,
-        postLocation: postLocation,
-        postImage: postImage,
+          rating: rating
       },
       withCredentials: true
     })
@@ -177,7 +175,7 @@ async authUser () {
 
   async deletePost(id) {
     return await axios({
-      method: "POST", // Use the appropriate HTTP method
+      method: "DELETE", // Use the appropriate HTTP method
       url: `${url}/post/delete/${id}`,
       headers: {
         "Content-Type": "application/json",
@@ -232,6 +230,7 @@ async authUser () {
   }
 
   async editUserProfile(imageURL, bio, userLocation) {
+    console.log(imageURL, bio, userLocation)
     return await axios ({
       method: "PUT",
       url: `${url}/profile/edit`,

@@ -6,14 +6,15 @@ import ApiClient  from '../../utils/ApiClient';
 import { useState, useEffect, Fragment } from "react";
 
 function ProfileGoogleMap(props) {
-    const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
+  const [supressGoogle, setSupressGoogle] = useState(false)
+
+  const apiKeyValue = process.env.NEXT_PUBLIC_GOOGLE_API_KEY 
     const googleLibraries = ["places","maps"]
 
     const centerOfWorld = { lat: 30, lng: 0 };
     const mapOptions = {
       disableDefaultUI: true
   };
-
 
   const [isOpen, setIsOpen] = useState(false);
   const handleMouseOver = (index) => {
@@ -56,9 +57,30 @@ function ProfileGoogleMap(props) {
     libraries: googleLibraries
   })
 
+  useEffect(() => { 
+    console.log('hideMap', props.hideMap)
+    if (props.hideMap) {
+      setSupressGoogle(true)
+    }
+    else {
+      setSupressGoogle(false)
+    }
+  }, [isLoaded, props.hideMap])
+
+
+  if (!isLoaded) {
+    return <div>Map loading...</div>
+  }
+
+  if (supressGoogle) {
+    return <div>Map supressed...</div>}
+
+  if (isLoaded && !supressGoogle) {
+
   return (
     <>
     {/* <LoadScript googleMapsApiKey={apiKeyValue}> */}
+    
     {isLoaded &&
       <GoogleMap  
       center={centerOfWorld} 
@@ -98,7 +120,7 @@ function ProfileGoogleMap(props) {
     </>
     )
 }
-
+}
 
 export default ProfileGoogleMap
 
