@@ -96,7 +96,8 @@ const CreatePost = (props) => {
         } catch (error) {
           console.error(error);
         }
-          const googleMapsResult = googleMapsResponse.data.results        
+          const googleMapsResult = googleMapsResponse.data.results 
+          console.log(googleMapsResult)       
           const lat = googleMapsResult[0].geometry.location.lat;
           const lng = googleMapsResult[0].geometry.location.lng;
           setUserLat(lat);
@@ -120,33 +121,33 @@ const CreatePost = (props) => {
 
   return (
    isOpen &&  (   
-    <div className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2' id="modal"
+    <div className='fixed top-1/2 left-1/2 transform -translate-x-1/4 -translate-y-1/2 md:w-1/3' id="modal"
 
     >    
-<form id="form" className=" max-w-screen top-0 mx-auto h-6/12 md:w-96 shadow-xl rounded-lg p-4 bg-black bg-opacity-80 text-white z-50" onSubmit={handleSubmit}
+<form id="form" className="max-w-screen top-0 mx-auto h-6/12 w-full  border-slate-200 border-2 shadow-xl rounded-xl p-4 bg-black bg-opacity-80 text-slate-200 z-50" onSubmit={handleSubmit}
 >
 <button type="button" onClick={openCloseModal} >
-   <FaRegWindowClose className="text-white text-2xl hover:text-red"/>
+   <FaRegWindowClose className="text-slate-200 text-2xl hover:text-red"/>
   </button>  
   <div className="flex flex-col items-center">
 
-  <h2 className="text-center text-xl font-bold">Create Post</h2>
+  <h2 className="text-center text-xl font-bold tracking-wider">Create Post</h2>
 
-  <label className="mt-2" for="location" > 
+  <label className="my-2 font-bold tracking-wide" for="location" > 
     Location:
     </label>
   {isLoaded && <Autocomplete onLoad={onLoadFunction} onPlaceChanged={onPlaceChangedFunction}> 
-    <input id="location-input" name="location" type="text" placeholder="Where have you been?" className="rounded-md my-1 p-1 text-black"></input>
+    <input id="location-input" name="location" type="text" placeholder="Where have you been?" className="rounded-md my-1 p-3 bg-black bg-opacity-80 border-slate-200 border-2"></input>
   </Autocomplete>
   }
-  <label className="my-2 text-center">
+  <label className="my-2 font-bold text-center tracking-wide">
   Description:
-    <textarea type="text" name="text" className="p-4 w-80 mt-1 rounded-md text-black" placeholder="What was it like?"/>
   </label>
-  <div className="flex flex-row justify-around">
-  <label>
+  <textarea type="text" name="text" className="p-4 w-80 my-1 rounded-md bg-black bg-opacity-80 border-slate-200 border-2" placeholder="What was it like?"/>
+  <div className="my-3 flex flex-row justify-around">
+  <label className="font-bold tracking-wide">
     Rating:
-    <select type="number" name="rating" className="border-gray-200 border-1 rounded-xl w-15 p-2 mx-2 relative text-black">
+    <select type="number" name="rating" className="border-slate-200 border-2 rounded-xl w-15 p-2 mx-2 relative bg-black bg-opacity-80">
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
@@ -164,14 +165,14 @@ const CreatePost = (props) => {
       uploadPreset="wanderlog" >
   {({ open }) => {
     return (
-      <button type="button" className="my-auto w-22 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-md text-black ml-3 px-6 p-2" onClick={() => open()}>
+      <button type="button" className="my-auto w-22 border border-slate-200 block mx-auto rounded-full bg-black bg-opacity-80 hover:shadow text-md text-slate-200 ml-3 px-6 p-2" onClick={() => open()}>
         Upload image
       </button>
     );
   }}
 </CldUploadWidget>
 </div>
-  <input type="submit" value="Submit" className="bottom border-2 border-white hover:bg-white cursor-pointer text-white hover:text-black font-bold py-2 my-4 px-4 rounded-lg "/>
+  <input type="submit" value="Submit" className="bottom border-2 border-slate-200 hover:bg-slate-200 cursor-pointer text-slate-200 hover:text-black font-bold py-2 my-4 px-4 rounded-lg tracking-wide"/>
   </div>
 </form>
 <Toaster position="top-center"  />

@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import TopRatedMap from '../../components/TopRatedMap';
 import { useState, useEffect } from "react";
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
+import { Spinner } from '@chakra-ui/react';
+
 
 const page = () => {
   const router = useRouter();
@@ -43,7 +45,7 @@ const page = () => {
   }, []);
   
   if (!isAuthenticated) {
-    return <div className="text-black mx-auto p-10">Authenticating...</div>;
+    return <div className="text-black mx-auto p-10"><Spinner speed='0.65s' thickness='20px' size='lg' /></div>;
   }
 
   return (

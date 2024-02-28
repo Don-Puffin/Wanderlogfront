@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
 
+import { Spinner } from '@chakra-ui/react'
+
 const AccordionItem = ({ question, answer, image}) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -12,7 +14,7 @@ const AccordionItem = ({ question, answer, image}) => {
       <div role="accordion">
         <button
           type="button"
-          className="text-left text-base  py-3 px-6 text-slate-500 font-semibold flex items-center transition-all"
+          className="text-left text-sm  py-3 px-6 text-slate-500 font-semibold flex items-center transition-all"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="mr-4">{question}</span>
@@ -65,7 +67,7 @@ const FAQAccordion = () => {
           <div className="flex items-center md:p-8 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
             
     <div>
-    <h2 className="text-2xl text-black font-bold mb-4">Help</h2>
+    <h2 className="text-xl text-black font-bold mb-4">Help</h2>
       <AccordionItem
         question="What is Wanderlog? "
         answer="Wanderlog is a vibrant community where you can like, share, and comment on others' posts while exploring their profiles, maps, reviews. Explore our site, see the places you really want to visit and share your experiences to inspire others."
@@ -98,14 +100,17 @@ const FAQAccordion = () => {
         image="/helpImage1.png"
 
       />
-      <Link className="text-slate-500 text-base"href="/feed">Back</Link>
+      
+      <Link className="text-slate-400 text-sm font-light"href="/feed">Back</Link>
+
          
             
           </div>
         </div>
       </div>
+  
     </div>
-    
+   
     
   );
 };

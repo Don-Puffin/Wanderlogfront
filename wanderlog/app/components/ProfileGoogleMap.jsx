@@ -4,6 +4,9 @@ import { GoogleMap, Marker, InfoWindow, useJsApiLoader, LoadScript} from '@react
 // import {currentProfile} from '../../app/(pages)/profile/page.js';
 import ApiClient  from '../../utils/ApiClient';
 import { useState, useEffect, Fragment } from "react";
+import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa6";
+
 
 function ProfileGoogleMap(props) {
   const [supressGoogle, setSupressGoogle] = useState(false)
@@ -102,11 +105,28 @@ function ProfileGoogleMap(props) {
           <Marker key={index} position={position} onMouseOver={() => handleMouseOver(index)} />
         );
         
+        let content;
+        const stars = locationDetails[index].rating
+        if (stars === 1) {
+          content = <div className="flex w-full justify-center text-yellow-500"><FaStar /><CiStar /><CiStar /><CiStar /><CiStar /></div>;
+        } else if (stars === 2) {
+          content = <div className="flex w-full justify-center text-yellow-500"><FaStar /><FaStar /><CiStar /><CiStar /><CiStar /></div>;
+        } else if (stars === 3) {
+          content = <div className="flex w-full justify-center text-yellow-500"><FaStar /><FaStar /><FaStar /><CiStar /><CiStar /></div>;
+        } 
+        else if (stars === 4) {
+          content = <div className="flex w-full justify-center text-yellow-500"><FaStar /><FaStar /><FaStar /><FaStar /><CiStar /></div>;
+        } else if (stars >= 5) {
+          content = <div className="flex w-full justify-center text-yellow-500"><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></div>;
+        }else {
+          content = <div>No Rating Given</div>;
+        }
+
         const infoWindow = (
           <InfoWindow key={`info-${index}`} position={position} onClick={handleMouseOut}>
             <div>
               <h2>{locationDetails[index].name}</h2>
-              <p>{locationDetails[index].rating}/5</p>
+              <div>{content}</div>
             </div>
           </InfoWindow>
         );
