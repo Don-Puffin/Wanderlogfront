@@ -31,6 +31,7 @@ const CookiePolicy = () => {
                         <p className="text-gray-600 text-sm">
                             We use cookies to enhance your experience. By continuing to visit this site, you agree to our use of
                             cookies.
+                            Some browsers may require you to enable cross-site tracking in order to use our site.
                         </p>
                         <button onClick={handleAccept} className="mt-4 bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded">
                             Accept

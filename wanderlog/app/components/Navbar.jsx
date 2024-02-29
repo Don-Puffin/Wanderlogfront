@@ -5,14 +5,12 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import Link from "next/link";
 import { GrMapLocation } from "react-icons/gr";
 import { MdOutlinePhotoCameraBack } from "react-icons/md";
-import { FaStar } from "react-icons/fa";
 import { GiPowerButton } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import ApiClient from "../../utils/ApiClient";
 import { useRouter } from "next/navigation";
 import { MdHelpOutline } from "react-icons/md";
-import { Modalbutton } from "./Modalbutton";
 import CreatePost from "./CreatePost";
 
 const NavBar = (props) => {
@@ -22,7 +20,6 @@ const NavBar = (props) => {
   const [modalOpen, setModalOpen] = useState();
 
   useEffect(() => {
-    console.log("pathname");
     console.log(pathname);
   }, [pathname]);
 
@@ -69,7 +66,6 @@ const NavBar = (props) => {
                className={`flex text-xl text-black mb-5 p-4 rounded-xl h-full`}>              
             <IoMdAddCircleOutline color="white" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: "300ms"}} />
             </button>
-            {/* Add other navbar links/buttons */}
           
             <Link href="/feed" className={`flex max-h-14 text-black p-4 rounded-xl hover:!bg-white`} style={{ backgroundColor: pathname === "/feed" ? "#ffffff" : "inherit"}}> 
            <MdOutlinePhotoCameraBack color="white" size={30} className="transition-transform hover:text-black hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/feed" ? "#000000" : "#ffffff" }} />
@@ -87,7 +83,6 @@ const NavBar = (props) => {
         
 
 
-        {/* Add other navbar links/buttons */}
         <button
           onClick={handleLogout}
           className="bottom-0 flex max-h-14 text-xl text-gray-900 mb-5 p-2 rounded-xl hover:bg-gray-200 cursor-pointer"

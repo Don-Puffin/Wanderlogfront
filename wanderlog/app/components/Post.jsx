@@ -5,11 +5,9 @@ import PostGoogleMap from './postGoogleMap.jsx';
 import { CiStar } from "react-icons/ci";
 import { FaStar } from "react-icons/fa6";
 import { FaRegTrashAlt } from "react-icons/fa";
-// import share from "./share.png";
 
 
 
-// console.log(share)
 const Post = (props) => {
 
   const [showPhoto, setShowPhoto] = useState(false)
@@ -18,32 +16,14 @@ const Post = (props) => {
 
         setShowPhoto(!showPhoto)
   };
-  // different buttons for owner and non-owner
   const client = new ApiClient();
-  // const [owned, setOwned] = useState()
-  // const checkUser = () => {
-  //   client.authUser().then(response => {
-  //     if (response.currentUser === props.name) {
-  //       console.log(response.currentUser);
-  //       console.log(props.name); 
-  //       setOwned(true)
-  //     } else {
-  //       setOwned(false)
-  //     }
-  //   }).catch(error => {
-  //     console.error("there was an error", error)
-  //   })
-  // }
 
   const owned = props.isOwned;
 
   let content;
 
   const stars = (props.rating)
-  
-  
-    // setShowStars(props.rating)
-  
+    
   const deletePost = () => {
     client.deletePost(props.idValue)
     .then(response => {
@@ -61,7 +41,6 @@ const Post = (props) => {
 
   const updateRating = (event) => {
     event.preventDefault();
-    console.log(event.target.value)
     client.updatePost(props.idValue, event.target.rating.value);
     setEditMode(!editMode)
     window.location.reload();
@@ -110,7 +89,6 @@ const Post = (props) => {
           <form onSubmit={updateRating} className="flex flex-col items-center">
               <label className="text-center text-sm text-gray-400 flex flex-col justify-center items-center p-2">
                 Update rating:
-                {/* <input type="number" name="rating" className="border-gray-200 border-1 rounded-lg w-10 p-2 mt-2"/> */}
                 <select type="number" name="rating" className="border-gray-200 border-1 rounded-lg w-1/2 p-2 mt-2">
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -120,7 +98,6 @@ const Post = (props) => {
                 </select>
 
               </label>
-            {/* <h1>Edit Mode</h1> */}
             <button type='submit' className="w-1/3 block mx-auto rounded-full bg-white hover:shadow text-sm text-slate-400 p-2">Save</button>
           </form>
         ) : (
@@ -148,7 +125,6 @@ const Post = (props) => {
           {/* <div>comments</div> */}
         </li>
         <li className="flex flex-col items-center justify-around">
-        {/* <div>Location</div> */}
         </li>
       </ul>
       <div className="p-4 border-t mx-8 mt-2">

@@ -3,15 +3,13 @@
 import React from 'react'
 import { TypeAnimation } from 'react-type-animation';
 import Link from 'next/link';
-import {NextUIProvider} from "@nextui-org/react";
 
 const page = () => {
   return (
     
-    <div id="body">
-      <div id="blackback" className="h-full">
-        {/* <div> */}
-        <div className="ml-14 flex flex-col lg:flex-row md:flex-col-medium p-2">   
+    <div id="body" className=" bg-black h-full">
+      <div id="blackback" className="bg-black min-h-screen">
+        <div className="mx-5 md:ml-14 flex flex-col lg:flex-row md:flex-col-medium p-2">   
                  
             {/* Spinning Globe */}
             <div className="p-4 w-full xl:w-1/2 md:1/4 md:mt-6 flex mx-auto mt-2 h-auto" id="earth"></div>           
@@ -45,7 +43,6 @@ const page = () => {
               </div>
             </div>
           </div>
-        {/* </div> */}
       </div>
     </div>
   )

@@ -22,7 +22,6 @@ import {
   WhatsappIcon,
 } from "react-share";
 
-import axios from 'axios';
 
 import NavBar from "../../components/Navbar";
 
@@ -34,12 +33,9 @@ const Page = () => {
 
 const router = useRouter();
 
-  const client = new ApiClient(
-    () => token,
-    () => logout()
-  );
+  const client = new ApiClient();
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
+  const [isAuthenticated, setIsAuthenticated] = useState(false); 
   const [currentProfile, setCurrentProfile] = useState({
     username: "Loading Username",
     bio: "Loading bio",
@@ -77,10 +73,8 @@ const router = useRouter();
   };
 
   const refreshList = () => {
-    console.log("refreshing");
     client.getUserProfile()
       .then(response => {
-        console.log(response);
         setCurrentProfile(response.profile);
         setLoading(false);
       })
@@ -91,8 +85,6 @@ const router = useRouter();
 
   useEffect(() => {
     authUser();
-    // just changed this - Alfie
-    // if (isAuthenticated) refreshList();
   }, []);
 
 
@@ -123,8 +115,6 @@ const router = useRouter();
     return <div className="text-black mx-auto p-10"><Spinner speed='0.65s' thickness='20px' size='lg' /></div>;
   }
 
-  // const [currentUser, setCurrentUser] = useState (mapUser)
-  // const [userLink, setUserLink] = useState(`https://wanderlogfront.vercel.app/${currentUser}`);
   return (
     <div className="flex flex-col md:flex-row  ">
     
@@ -170,9 +160,7 @@ const router = useRouter();
         loading ? (
           <div><Spinner speed='0.65s' thickness='20px' size='lg' /></div>
         ) : (
-          // just changed this - Alfie
           <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng} hideMap={hideMapInComponentTree}/>
-          // currentProfile?.lat && currentProfile?.lng && <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
 
         )
       }
@@ -282,17 +270,11 @@ I thought you might be interested in joining me on Wanderlog! It would be a grea
         </li>
       </ul>
       </>)}
-  
-  {/* { isEditMode ? (<form>
-    <h1>Edit profile</h1>
 
-  </form>) : (
-    null) } */}
 
       <div className="flex p-4 border-t mx-8 mt-2">
       {isEditMode ? (
           <div>
-            {/* <h1>Edit Mode</h1> */}
             <button onSubmit={handleSubmit}  type='submit' className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2" onClick={handleSubmit}>Save</button>
           </div>
         ) : (
@@ -301,15 +283,6 @@ I thought you might be interested in joining me on Wanderlog! It would be a grea
           </div>
         )}
       </div>
-        {/* <button className="w-20 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500 px-6 p-2">Edit</button>
-        
-
-      <button 
-            type='submit'
-            className={`bg-${isEditMode ? 'green' : 'cyan'}-500 text-black p-2 rounded-md shadow-lg mx-auto min-w-40`}
-          >
-            {isEditMode ? 'Update Profile' : 'Edit Profile'}
-          </button> */}
 
 
 

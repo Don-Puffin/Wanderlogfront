@@ -19,22 +19,25 @@
 @media (max-width: 1023px) {
   #body, #blackback {
     height: 100vh;
+  }}
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
-
-}
-
-
-#body, #blackback {
-  height: 100vh;
-}
-
-#blackback {
-  background-color: black;
-  display: flex;
-  justify-content: center; 
-  align-items: center; 
-  height: 100%; 
-}
+  
+  #body {
+    min-height: 100%;
+  }
+  
+  #blackback {
+    background-color: black;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100%;
+  }
 
 
 
@@ -105,4 +108,4 @@
         z-index: -50;
       }
 
-  
+    

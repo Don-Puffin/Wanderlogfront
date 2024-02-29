@@ -6,7 +6,6 @@ import SideBar from "../../components/Sidebar";
 import ApiClient from '../../../utils/ApiClient';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import CreatePost from "../../components/CreatePost";
 import NavBar from "../../components/Navbar";
 
 import { Spinner } from '@chakra-ui/react';
@@ -21,18 +20,16 @@ const Page = () => {
     () => logout()
   );
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hideMapInComponentTree, setHideMapInComponentTree] = useState(false);
   
   const refreshList = () => {
-    console.log("refreshing");
     client.getAllPosts()
       .then(response => {
-        console.log(response);
         setPosts(response.posts);
-        setLoading(false); // Set loading to false after fetching posts
+        setLoading(false);
       })
       .catch(error => {
         console.error('Error fetching posts:', error);
@@ -93,7 +90,6 @@ const Page = () => {
         
         </div>
       <div>
-      {/* <CreatePost /> */}
       </div>
       {loading && <div className="text-black mx-auto p-10"><img src="/wanderlog favicon.png" className=" relative w-20 ml-2 -mb-6"></img>
       <Spinner speed='0.65s' thickness='20px' size='lg' /></div>}
@@ -118,7 +114,6 @@ const Page = () => {
     
     </div>
   );
-  // flex flex-column-reverse
 
 };
 
