@@ -6,7 +6,6 @@ import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import TopRatedMap from '../../components/TopRatedMap';
 import { useState, useEffect } from "react";
-import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import { Spinner } from '@chakra-ui/react';
 
 
@@ -40,8 +39,6 @@ const page = () => {
   
   useEffect(() => {
     authUser();
-    // just changed this - Alfie
-    // if (isAuthenticated) refreshList();
   }, []);
   
   if (!isAuthenticated) {
@@ -71,9 +68,7 @@ const page = () => {
         hideMapInComponentTree && <img className="w-full h-full object-cover object-center" src="/placeholdermap.png" alt="post image" />
       }
       {
-          // just changed this - Alfie
             <TopRatedMap lat={0} lng={0} hideMap={hideMapInComponentTree}></TopRatedMap>
-          // currentProfile?.lat && currentProfile?.lng && <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng}/>
 
         
       }     

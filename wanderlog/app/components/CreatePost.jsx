@@ -1,15 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Loader } from '@googlemaps/js-api-loader' 
 import ApiClient  from '../../utils/ApiClient';
 import axios from 'axios';
-import {refreshList} from '../(pages)/feed/page.js';
-import {NextUIProvider} from "@nextui-org/react";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import { CldUploadWidget } from 'next-cloudinary';
 import {useRouter} from "next/navigation";
 import { useJsApiLoader, Autocomplete } from '@react-google-maps/api';
-// import {openCloseModal} from '../components/Sidebar.jsx';
 import {FaRegWindowClose} from "react-icons/fa";
 import toast, {Toaster} from "react-hot-toast";
 
@@ -58,7 +53,6 @@ const CreatePost = (props) => {
 
 
   const openCloseModal = () => {
-    // modalOpen ? setModalOpen(false) : setModalOpen(true);
     props.setIsOpen(!isOpen)
   }
 
@@ -67,7 +61,6 @@ const CreatePost = (props) => {
         
         const postLocation = {name: "", lat: 0, long: 0, rating: 0}
         postLocation.name = locationName
-        console.log("name", postLocation.name)
         postLocation.lat = userLat
         postLocation.long = userLng
         postLocation.rating = event.target.rating.value
@@ -77,7 +70,7 @@ const CreatePost = (props) => {
         client.createPost(postText, postLocation, postImage)
         .then(response => {
             notify(response.message);
-            console.log(response)
+            console.log(response.message)
             window.location.reload();
           })
         .catch(error => {
@@ -97,7 +90,6 @@ const CreatePost = (props) => {
           console.error(error);
         }
           const googleMapsResult = googleMapsResponse.data.results 
-          console.log(googleMapsResult)       
           const lat = googleMapsResult[0].geometry.location.lat;
           const lng = googleMapsResult[0].geometry.location.lng;
           setUserLat(lat);

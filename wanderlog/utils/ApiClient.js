@@ -8,12 +8,10 @@ export default class ApiClient {
         this.logoutHandler = logoutHandler;
       }
     
-    //logout
 
-    // Perform login request
     async getLogin(username, password) {
         return await axios({
-            method: "POST", // Use the appropriate HTTP method
+            method: "POST",
             url: `${url}/auth/login`,
             headers: {
               "Content-Type": "application/json",
@@ -26,17 +24,17 @@ export default class ApiClient {
         })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data containing status and message
+      return response.data; 
     })
     .catch(error => {
       console.error(error.response.data)
-      return error.response.data; // re-throw the error to be caught by the caller
+      return error.response.data; 
       });
   }
 
   async register(username, password) {
     return await axios({
-      method: "POST", // Use the appropriate HTTP method
+      method: "POST", 
       url: `${url}/auth/register`,
       headers: {
         "Content-Type": "application/json",
@@ -49,18 +47,17 @@ export default class ApiClient {
     })
   .then(response => {
     console.log(response.data);
-    return response.data; // return response data containing status and message
+    return response.data; 
   })
   .catch(error => {
     console.error(error.response.data)
-    return error.response.data; // re-throw the error to be caught by the caller
+    return error.response.data; 
   });
 }
 
 async logout() {
-  console.log("apiclient function activate")
   return await axios({
-    method: "POST", // Use the appropriate HTTP method
+    method: "POST", 
     url: `${url}/auth/logout`,
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +68,7 @@ async logout() {
     return response.data;
   }).catch(error => {
     console.error(error.response.data)
-    return error.response.data; // re-throw the error to be caught by the caller
+    return error.response.data; 
 })
 }
 
@@ -95,7 +92,7 @@ async authUser () {
 
   async getAllPosts() {
     return await axios({
-      method: "GET", // Use the appropriate HTTP method
+      method: "GET",
       url: `${url}/post/posts`,
       headers: {
         "Content-Type": "application/json",
@@ -104,16 +101,16 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data
+      return response.data;
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
+      throw error; 
     });
   }
 
   async getUserPosts() {
     return await axios({
-      method: "GET", // Use the appropriate HTTP method
+      method: "GET", 
       url: `${url}/post/userPosts`,
       headers: {
         "Content-Type": "application/json",
@@ -122,17 +119,17 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data
+      return response.data; 
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
+      throw error; 
     });
   
   }
 
   async createPost(postText, postLocation, postImage) {
     return await axios({
-      method: "POST", // Use the appropriate HTTP method
+      method: "POST", 
       url: `${url}/post/create`,
       headers: {
         "Content-Type": "application/json",
@@ -148,17 +145,17 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data containing status and message
+      return response.data; 
     })
     .catch(error => {
       console.error(error.response.data)
-      return error.response.data; // re-throw the error to be caught by the caller
+      return error.response.data; 
     });
   }
 
   async updatePost(id, rating){
     return await axios({
-      method: "PUT", // Use the appropriate HTTP method
+      method: "PUT", 
       url: `${url}/post/update/${id}`,
       headers: {
         "Content-Type": "application/json",
@@ -170,17 +167,17 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-    return response.data; // return response data containing status and message
+    return response.data; 
     })
     .catch(error => {
       console.error(error.response.data)
-      return error.response.data; // re-throw the error to be caught by the caller
+      return error.response.data; 
     });
   }
 
   async deletePost(id) {
     return await axios({
-      method: "DELETE", // Use the appropriate HTTP method
+      method: "DELETE",
       url: `${url}/post/delete/${id}`,
       headers: {
         "Content-Type": "application/json",
@@ -189,17 +186,17 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-    return response.data; // return response data containing status and message
+    return response.data; 
     })
     .catch(error => {
       console.error(error.response.data)
-      return error.response.data; // re-throw the error to be caught by the caller
+      return error.response.data; 
     });
   }
 
   async getUserProfile() {
     return await axios({
-      method: "GET", // Use the appropriate HTTP method
+      method: "GET", 
       url: `${url}/profile/profile`,
       headers: {
         "Content-Type": "application/json",
@@ -208,17 +205,17 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data
+      return response.data; 
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
+      throw error; 
     });
   
   }
 
   async getOtherProfile(id) {
     return await axios({
-      method: "GET", // Use the appropriate HTTP method
+      method: "GET", 
       url: `${url}/profile/otherprofile/${id}`,
       headers: {
         "Content-Type": "application/json",
@@ -227,16 +224,15 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data
+      return response.data; 
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
+      throw error; 
     });
   
   }
 
   async editUserProfile(imageURL, bio, userLocation) {
-    console.log(imageURL, bio, userLocation)
     return await axios ({
       method: "PUT",
       url: `${url}/profile/edit`,
@@ -254,7 +250,7 @@ async authUser () {
       return response.data
     }).catch(error => {
       console.error(error.response.data)
-      return error.response.data; // re-throw the error to be caught by the caller
+      return error.response.data; 
     })
   }
 
@@ -262,7 +258,7 @@ async authUser () {
     let reqId = null
     id ? reqId = id : reqId = null
     return await axios({
-      method: "GET", // Use the appropriate HTTP method
+      method: "GET", 
       url: `${url}/map/visitedPlaces/${reqId}`,
       headers: {
         "Content-Type": "application/json",
@@ -271,17 +267,17 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data
+      return response.data; 
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
+      throw error; 
     });
   }
 
 
   async getTopRatedLocations(id) {
     return await axios({
-      method: "GET", // Use the appropriate HTTP method
+      method: "GET", 
       url: `${url}/map/topRatedPlaces`,
       headers: {
         "Content-Type": "application/json",
@@ -290,10 +286,10 @@ async authUser () {
     })
     .then(response => {
       console.log(response.data);
-      return response.data; // return response data
+      return response.data; 
     })
     .catch(error => {
-      throw error; // re-throw the error to be caught by the caller
+      throw error; 
     });
   }
   

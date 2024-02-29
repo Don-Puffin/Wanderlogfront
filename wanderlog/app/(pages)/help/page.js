@@ -2,11 +2,16 @@
 import React, { useState } from 'react';
 import Link from 'next/link'
 import Image from 'next/image'
-
+import { IoReturnDownBackOutline } from "react-icons/io5";
 import { Spinner } from '@chakra-ui/react'
-
+import { TiArrowBack } from "react-icons/ti";
 const AccordionItem = ({ question, answer, image}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
 
   return (
     <>
@@ -32,14 +37,17 @@ const AccordionItem = ({ question, answer, image}) => {
           </svg>
         </button>
         <div className={`py-4 px-6 ${isOpen ? '' : 'hidden'}`}>
-          <p className="text-sm text-gray-500">{answer}</p>
-            <Image className='mt-4 rounded-xl'
+          <p className="text-sm text-gray-500 mb-5">{answer}</p>
+          {/* <a href={image}> */}
+            <Image 
+className={`rounded-xl ${clicked ? 'scale-[150%] md:scale-[300%] border-2 border-white translate-x-6 transition-transform' : ''}`}      
       src={image}
       width={300}
       height={200}
-      alt="Picture of the author"
-    />
-          <Link className="text-xs"href="https://www.youtube.com/">Wanderlog Youtube Help Channel</Link>
+      alt="Travel Photo"
+    onClick={handleClick}/>
+    {/* </a> */}
+          
           
         </div>
         
@@ -52,9 +60,9 @@ const AccordionItem = ({ question, answer, image}) => {
 const FAQAccordion = () => {
   return (
       
-      <div className="font-[sans-serif] bg-black text-[#333] h-screen">
+      <div className="font-[sans-serif] bg-black text-[#333] h-full">
         
-        <div className="grid md:grid-cols-2 items-center gap-8 h-full">
+        <div className="grid bg-black md:grid-cols-2 items-center gap-8 h-screen">
           <div className="p-4">
             <img
               src="/wanderlog logo3.png"
@@ -64,7 +72,7 @@ const FAQAccordion = () => {
             />
             
           </div>
-          <div className="flex items-center md:p-8 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
+          <div className="p-6 flex items-center md:p-8 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
             
     <div>
     <h2 className="text-xl text-black font-bold mb-4">Help</h2>
@@ -87,21 +95,21 @@ const FAQAccordion = () => {
       <AccordionItem
         question="How do I make a post?"
         answer="Select Create Post from the side bar then upload your photo and enter your location details and select it from the drop down auto complete bar."
-        image="/helpImage1.png"
+        image="/helpImage3.png"
       />
       <AccordionItem
         question="How do I edit my profile?"
         answer="Select Profile from the side bar and edit your infomation or upload an image."
-        image="/helpImage1.png"
+        image="/helpImage4.png"
 
       /><AccordionItem
         question="How do I share my posts with friends?"
-        answer="Your unique URL can be found on your profile page and can be used to hare your travels."
-        image="/helpImage1.png"
+        answer="Your unique URL can be found on your profile page and can be used to share your travels."
+        image="/helpImage5.png"
 
       />
-      
-      <Link className="text-slate-400 text-sm font-light"href="/feed">Back</Link>
+      <br></br>
+      <Link className="w-1/6 border border-grey-500 block text-center rounded-full bg-white hover:shadow text-sm text-gray-500 p-2" href="/feed"><TiArrowBack className="mx-auto text-3xl scale-y-[-1]" /></Link>
 
          
             

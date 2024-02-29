@@ -5,14 +5,12 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import Link from "next/link";
 import { GrMapLocation } from "react-icons/gr";
 import { MdOutlinePhotoCameraBack } from "react-icons/md";
-import { FaStar } from "react-icons/fa";
 import { GiPowerButton } from "react-icons/gi";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import  ApiClient from "../../utils/ApiClient";
 import { useRouter } from "next/navigation";
 import { MdHelpOutline } from "react-icons/md";
-import {Modalbutton} from "./Modalbutton"
 import CreatePost from "./CreatePost";
 
 
@@ -67,7 +65,6 @@ import CreatePost from "./CreatePost";
             <IoMdAddCircleOutline color="inherit" size={30} className="transition-transform hover:scale-110" style={{ transitionDuration: "300ms"}} />
             <div className="m-2 my-auto"> Add Post</div>
             </button>
-            {/* Add other navbar links/buttons */}
           
             <Link href="/feed" className={`flex max-h-14 text-white p-4 rounded-xl hover:bg-white hover:text-black`} style={{ backgroundColor: pathname === "/feed" ? "#ffffff" : "inherit"}}> 
            <MdOutlinePhotoCameraBack color="white" size={30} className="transition-transform hover:text-black hover:scale-110" style={{ transitionDuration: "300ms", color: pathname === "/feed" ? "#000000" : "inherit" }} />
@@ -85,11 +82,7 @@ import CreatePost from "./CreatePost";
     </Link>
           
           
-        
-
-
-        {/* Add other navbar links/buttons */}
-        <button
+          <button
           onClick={handleLogout}
           className=" flex max-h-14 text-xl text-white  p-2 rounded-xl hover:bg-white hover:text-black cursor-pointer"
           

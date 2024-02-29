@@ -1,6 +1,5 @@
 "use client";
 import React from 'react'
-//import {APIProvider, Map, Marker, useMapsLibrary} from '@vis.gl/react-google-maps';
 import { GoogleMap, Marker, useJsApiLoader, LoadScript } from '@react-google-maps/api';
 import { useEffect, useState } from 'react';
 
@@ -20,7 +19,6 @@ function postGoogleMap(props) {
   })
 
   useEffect(() => { 
-    console.log('hideMap', props.hideMap)
     if (props.hideMap) {
       setSupressGoogle(true)
     }

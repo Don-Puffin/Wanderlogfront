@@ -4,7 +4,6 @@ import SideBar from "../../components/Sidebar"
 import ApiClient  from '../../../utils/ApiClient';
 import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
-import { CldUploadWidget } from 'next-cloudinary';
 import NavBar from '../../components/Navbar';
 
 import {
@@ -34,7 +33,7 @@ const Page = ({ params }) => {
 
  
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentProfile, setCurrentProfile] = useState({
     username: "Loading Username",
     bio: "Loading bio",
@@ -71,10 +70,8 @@ const Page = ({ params }) => {
   };
 
   const refreshList = () => {
-    console.log("refreshing");
     client.getOtherProfile(params.id)
       .then(response => {
-        console.log(response);
         setCurrentProfile(response.profile);
         setLoading(false);
       })
@@ -128,7 +125,6 @@ const Page = ({ params }) => {
       <div className="rounded-t-lg h-80 overflow-hidden">
       <h1 className="hidden">Profile</h1>        
 
-      {/* <div><h1 className="pt-20 text-center text-3xl">User : {params.id}</h1></div> */}
       {
         hideMapInComponentTree && <img className="w-full h-full object-cover object-center" src="/profplaceholdermap.png" alt="post image" />
       }
@@ -198,11 +194,6 @@ I thought you might be interested in joining me on Wanderlog! It would be a grea
       
       </>
       </div>
-  {/* { isEditMode ? (<form>
-    <h1>Edit profile</h1>
-
-  </form>) : (
-    null) } */}
 
       <div className="flex p-4 border-t mx-8 mt-2">
      

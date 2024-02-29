@@ -12,8 +12,6 @@ import toast, {Toaster} from "react-hot-toast";
 const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [strengthText, setStrengthText] = useState('rotate-0 h-10 w-10');
-  const [notifText, setNotifText] = useState('');
-  const [notifDisplay, setNotifDisplay] = useState('');
   const [barsClass, setBarsClass] = useState('');
   const [showPasswordError, setPasswordError] = useState(false);
   const client = new ApiClient(
@@ -90,20 +88,16 @@ const RegisterForm = () => {
       notify(data.message);
       router.push("/feed");
     } else {      
-      // setNotifDisplay(true);
-      // setNotifText(data.message); // Display message if login unsuccessful
       notify(data.message);
       setPasswordError(true);
     }
     })
     .catch(() => {
-      // setNotifDisplay(true);
-      // setNotifText(data.message); // Handle error if request fails
       notify(data.message)
       setPasswordError(true);
     })
     .finally(() => {
-    setDisabled(false); // Re-enable the login button
+    setDisabled(false); 
     });
     }
 
@@ -113,7 +107,6 @@ const RegisterForm = () => {
 
       <div className="font-[sans-serif] bg-black text-[#333] md:h-screen">
         <CookiePolicy />
-        {/* <Toast notifText={notifText} isVisible={notifDisplay}></Toast> */}
         <div className="grid md:grid-cols-2 items-center gap-8 h-full">
           <div className=" p-4">
             <img
@@ -126,21 +119,20 @@ const RegisterForm = () => {
           <div className="flex items-center md:p-8 p-6 bg-white md:rounded-tl-[55px] md:rounded-bl-[55px] h-full">
             
           
-            {/* DELETE FORM */}
-            {/* <form className="max-w-lg w-full mx-auto" onSubmit={submitHandler}> */}
               <div >
                 
 
                 
               </div>
               <div>
-                <h3 className="text-4xl font-extrabold">Register<span className="text-lg hover:text-green-500">  <Tooltip
-      content={
-        <div className="bg-slate-200 px-1 py-2">
+                <h3 className="text-4xl font-extrabold">Register<span className="text-lg hover:text-green-500">  
+      <Tooltip
+          content={
+          <div className="bg-slate-200 px-1 py-2">
           <div className="text-slate-700 text-small font-bold">How To Register</div>
-          <p className="text-slate-700 text-sm ">
+          <p className="text-slate-700 text-sm ">Create a unique username and password below.</p>
           <Link href="./help">Click For Help Page</Link>
-          </p>
+          
         </div>
       }
     >
@@ -196,12 +188,7 @@ const RegisterForm = () => {
 
         </div>
         
-        {/* <div id="bars" className={barsClass}>
-          <div></div>
-        </div> */}
-        {/* <div className={`strength my-8 flex flex-1 items-center gap-8 h-6 rounded-md bg-opacity-10 bg-white ${barsClass}`} id="strength">
-          {strengthText && <span>{strengthText}</span>}
-        </div> */}
+
         <div className="flex items-center">
         
           <button
@@ -219,12 +206,7 @@ const RegisterForm = () => {
               </div>
               
     
-              
-            {/* </form> */}
-
-
-{/* DELETE FORM */}
-
+      
           </div>
         </div>
         <Toaster position="bottom-right"/>

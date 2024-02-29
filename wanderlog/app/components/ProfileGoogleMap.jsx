@@ -1,7 +1,5 @@
 import React from 'react'
-// import {APIProvider, Map, Marker, useMarkerRef, useMapsLibrary, InfoWindow} from '@vis.gl/react-google-maps';
 import { GoogleMap, Marker, InfoWindow, useJsApiLoader, LoadScript} from '@react-google-maps/api';
-// import {currentProfile} from '../../app/(pages)/profile/page.js';
 import ApiClient  from '../../utils/ApiClient';
 import { useState, useEffect, Fragment } from "react";
 import { CiStar } from "react-icons/ci";
@@ -31,16 +29,12 @@ function ProfileGoogleMap(props) {
     
 
   const client = new ApiClient();
-  // const positions = []
   const [positions, setPositions] = useState([]);
   const [locationDetails, setLocationDetails] = useState([]);
-  // const [markerRef, marker] = useMarkerRef();
   const getLocations = () => {
-    console.log("id passed to map", props.id)
     client.getMapLocations(props.id).then(response => {
       const locationDetail = response.mapLocations;
       const positions = response.mapLocations ? response.mapLocations.map(loc => ({ lat: loc.lat, lng: loc.lng })) : [];
-      console.log(positions);
       setPositions(positions);
       setLocationDetails(locationDetail);
     })
@@ -50,10 +44,6 @@ function ProfileGoogleMap(props) {
     getLocations();
   }, []);
 
-  // const closeInfoWindow = () => {
-  //   markerRef.current.close();
-  // }
-
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: apiKeyValue,
@@ -61,7 +51,6 @@ function ProfileGoogleMap(props) {
   })
 
   useEffect(() => { 
-    console.log('hideMap', props.hideMap)
     if (props.hideMap) {
       setSupressGoogle(true)
     }
@@ -82,7 +71,6 @@ function ProfileGoogleMap(props) {
 
   return (
     <>
-    {/* <LoadScript googleMapsApiKey={apiKeyValue}> */}
     
     {isLoaded &&
       <GoogleMap  
@@ -95,12 +83,7 @@ function ProfileGoogleMap(props) {
       options={mapOptions}
       > 
         {positions.length > 0 ? positions.map((position, index) => {
-        // <Marker key={index} position={position} onMouseOver ={() => handleMouseOver(index)} onMouseOut={handleMouseOut}>
-        //   {isOpen === index && <InfoWindow position={position} >
-        //   <h2>{locationDetails[index].name}</h2>
-        //   <p>{locationDetails[index].rating}/5</p>
-        // </InfoWindow>}
-        // </Marker>
+
         const marker = (
           <Marker key={index} position={position} onMouseOver={() => handleMouseOver(index)} />
         );
@@ -133,10 +116,7 @@ function ProfileGoogleMap(props) {
     
         return [marker, isOpen === index && infoWindow];
         }) : null}
-        {/* <Marker position={position} /> */}
-        {/* <Marker position={position2} /> */}
       </GoogleMap>}
-      {/* </LoadScript> */}
     </>
     )
 }
