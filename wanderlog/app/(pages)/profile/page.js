@@ -97,13 +97,14 @@ const router = useRouter();
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    client.editUserProfile(currentProfile.imageURL, currentProfile.bio, currentProfile.userLocation)
+    await client.editUserProfile(currentProfile.imageURL, currentProfile.bio, currentProfile.userLocation)
       .then(response => {
         console.log('Profile updated successfully:', response.data);
         notify(response.message);
         setIsEditMode(!isEditMode);
+        window.location.reload();
       })
       .catch(error => {
         console.error('Error updating profile:', error);
@@ -166,19 +167,20 @@ const router = useRouter();
       }
       </div>
       <div id="pic" className="mx-auto w-32 h-32 left-0 mt-16 border-4 border-white rounded-full overflow-hidden">
-        <img className="object-cover object-center h-32" src={currentProfile.imageURL} />
+        <img className="object-cover h-full w-full" src={currentProfile.imageURL} />
       </div>
       
       <CldUploadWidget 
-      onSuccess={(results, error) => {    
+      onSuccess={async (results, error) => {    
         if (error) {
           console.log(error);
-          notify("Error updating profile picture. Please try again later.")
         }
-        client.editUserProfile(results.info.url)
+        await client.editUserProfile(results.info.url)
         .then(response => {
           console.log("Profile picture updated successfully!", response.data)
-          notify('Profile picture updated successfully!');})
+          notify('Profile picture updated successfully!');
+          window.location.reload();
+        })
         .catch(error => {
           console.error("Error updating profile picture.", error)
           notify("Error updating profile picture. Please try again later.")

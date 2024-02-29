@@ -60,9 +60,9 @@ className={`rounded-xl ${clicked ? 'scale-[150%] md:scale-[300%] border-2 border
 const FAQAccordion = () => {
   return (
       
-      <div className="font-[sans-serif] bg-black text-[#333] h-full">
+      <div className="font-[sans-serif] bg-black text-[#333] min-h-full" id="blackback">
         
-        <div className="grid bg-black md:grid-cols-2 items-center gap-8 h-screen">
+        <div className="grid bg-black md:grid-cols-2 items-center gap-8 h-full min-h-screen">
           <div className="p-4">
             <img
               src="/wanderlog logo3.png"

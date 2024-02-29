@@ -63,7 +63,7 @@ const page = () => {
   <div className="hidden md:block sticky top-0 w-1/4 bg-white">
   <SideBar triggerVisibilityChangeInParent={(visibility) => setHideMapInComponentTree(visibility)}/>
   </div>   
-  <div className="h-11/12 w-11/12  mx-auto">
+  <div className="h-11/12 w-11/12 mx-auto">
               {
         hideMapInComponentTree && <img className="w-full h-full object-cover object-center" src="/placeholdermap.png" alt="post image" />
       }
