@@ -91,12 +91,12 @@ import CreatePost from "./CreatePost";
         {/* Add other navbar links/buttons */}
         <button
           onClick={handleLogout}
-          className=" flex max-h-14 text-xl text-white mb-5 p-2 rounded-xl hover:bg-white hover:text-black cursor-pointer"
+          className=" flex max-h-14 text-xl text-white  p-2 rounded-xl hover:bg-white hover:text-black cursor-pointer"
           
         >
-          <GiPowerButton color="inherit" size={30} />
-          <span className="ml-"></span>
-          <div className="m-2 my-auto"> Logout</div>
+          <GiPowerButton color="inherit" className="ml-2" size={30} />
+          <span className="ml-2"></span>
+          <div className="ml-2 my-auto"> Logout</div>
         </button>
       </div>
       <div className={"w-screen"} id="modal-container">

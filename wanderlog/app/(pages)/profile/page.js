@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import { CldUploadWidget } from 'next-cloudinary';
 import toast, {Toaster} from "react-hot-toast";
+import { Spinner } from '@chakra-ui/react';
 
 import {
   EmailShareButton,
@@ -119,7 +120,7 @@ const router = useRouter();
   };
 
   if (!isAuthenticated) {
-    return <div className="text-black mx-auto p-10">Authenticating...</div>;
+    return <div className="text-black mx-auto p-10"><Spinner speed='0.65s' thickness='20px' size='lg' /></div>;
   }
 
   // const [currentUser, setCurrentUser] = useState (mapUser)
@@ -163,11 +164,11 @@ const router = useRouter();
       <div className="rounded-t-lg h-80 overflow-hidden">
       <h1 className="hidden">Profile</h1>
       {
-        hideMapInComponentTree && <img className="w-full h-36 object-cover object-center" src={`https://a.ccdn.es/cnet/contents/media/own/2022/6/1299003.jpg/900x505cut/`} alt="post image" />
+        hideMapInComponentTree && <img className="w-full h-full object-cover object-center" src="/profplaceholdermap.png" alt="post image" />
       }
       {
         loading ? (
-          <div>Loading map...</div>
+          <div><Spinner speed='0.65s' thickness='20px' size='lg' /></div>
         ) : (
           // just changed this - Alfie
           <ProfileGoogleMap lat={currentProfile.lat} lng={currentProfile.lng} hideMap={hideMapInComponentTree}/>
@@ -176,7 +177,7 @@ const router = useRouter();
         )
       }
       </div>
-      <div className="mx-auto w-32 h-32 left-0 mt-16 border-4 drop-shadow-lg border-white rounded-full overflow-hidden">
+      <div id="pic" className="mx-auto w-32 h-32 left-0 mt-16 border-4 border-white rounded-full overflow-hidden">
         <img className="object-cover object-center h-32" src={currentProfile.imageURL} />
       </div>
       

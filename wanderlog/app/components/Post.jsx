@@ -87,10 +87,10 @@ const Post = (props) => {
 
 
   return (
-    <div  className="min-w-96 sm:max-w-11/12 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
+    <div  className="w-10/12 sm:w-11/12 mt-10 bg-white shadow-xl rounded-lg text-gray-900">
       <div className="rounded-t-lg h-36 overflow-hidden">
       {
-        props.hideGoogleMap && <img className="w-full h-36 object-cover object-center" src={`https://a.ccdn.es/cnet/contents/media/own/2022/6/1299003.jpg/900x505cut/`} alt="post image" />
+        props.hideGoogleMap && <img className="w-full h-36 object-cover object-center" src="feedplaceholdermap.png" alt="post image" />
       }
       <PostGoogleMap  postLocation = {props.postLocation} lat={props.lat} lng={props.lng} rating={props.rating}
         hideMap={props.hideGoogleMap}
@@ -103,9 +103,9 @@ const Post = (props) => {
       <div className="text-center mt-2 items-center">
         <h2 className="font-extralight text-base text-gray-500"><a href={`https://wanderlogfront.vercel.app/${props.name}`}>{props.name}</a></h2>
         <p className="font-semibold">{props.location}</p>
-        <p className="mx-auto mt-2 ">{content}</p>
+        <div className="mx-auto mt-2 ">{content}</div>
         {owned ? (
-        <div>
+        <div  className="flex flex-row items-center gap-4 mr-2 justify-center">
                 {editMode ? (
           <form onSubmit={updateRating} className="flex flex-col items-center">
               <label className="text-center text-sm text-gray-400 flex flex-col justify-center items-center p-2">
@@ -125,14 +125,16 @@ const Post = (props) => {
           </form>
         ) : (
           <div>
-        <button className="w-1/3 my-1 block mx-auto rounded-full bg-white hover:shadow text-sm text-slate-400 p-2" onClick={openEdit}>Edit</button>
+        <button className="w-full my-1 block mx-auto rounded-full bg-white hover:shadow text-sm text-slate-400 p-2" onClick={openEdit}>Edit</button>
           </div>
         )}
         <button className="max-auto text-slate-400" onClick={deletePost}><FaRegTrashAlt /></button>
         </div>
+       
       ) : (
         null
       )}
+      
         
       </div>
       <div className="text-xs text-center mt-5 mx-auto max-w-56 ">{props.info}</div>
@@ -150,7 +152,7 @@ const Post = (props) => {
         </li>
       </ul>
       <div className="p-4 border-t mx-8 mt-2">
-      <button className="w-1/3 border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500  p-2" onClick={toggleShowPhoto}>Photo</button>
+      <button className="w-full border border-grey-500 block mx-auto rounded-full bg-white hover:shadow text-sm text-gray-500  p-2" onClick={toggleShowPhoto}>Photo</button>
       </div>
       {/* button renders conditionally depending on if owner */}
       {showPhoto? (

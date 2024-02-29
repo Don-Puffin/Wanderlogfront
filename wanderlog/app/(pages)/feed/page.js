@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import CreatePost from "../../components/CreatePost";
 import NavBar from "../../components/Navbar";
 
+import { Spinner } from '@chakra-ui/react';
+
 
 
 const Page = () => {
@@ -58,11 +60,11 @@ const Page = () => {
   }, []);
 
   if (!isAuthenticated) {
-    return <div className="text-black mx-auto p-10">Authenticating...</div>;
+    return <div className="text-black mx-auto p-10"><Spinner speed='0.65s' thickness='20px' size='lg' /></div>;
   }
 
   return (
-    <div className="flex flex-col md:flex-row  ">
+    <div className="flex flex-col  md:flex-row  ">
     
 
       {hideMapInComponentTree &&
@@ -93,7 +95,8 @@ const Page = () => {
       <div>
       {/* <CreatePost /> */}
       </div>
-      {loading && <div className="text-black mx-auto p-10">Wanderlog is loading...</div>}
+      {loading && <div className="text-black mx-auto p-10"><img src="/wanderlog favicon.png" className=" relative w-20 ml-2 -mb-6"></img>
+      <Spinner speed='0.65s' thickness='20px' size='lg' /></div>}
 
       {!loading && posts?.length === 0  && (
         <div className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -106,8 +109,8 @@ const Page = () => {
       )}
 
       {posts.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 h-full w-screen justify-items-center bg-white md:px-10">
-          {posts.map((post) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 g h-full w-screen justify-items-center bg-white md:px-10">
+          {posts.reverse().map((post) => (
             <Post key={post.id} idValue={post.id} zIndex={1}  name={post.username} profilePic={post.userImageURL} location={post.postLocation} lat={post.lat} lng={post.lng} info={post.postText} imageURL={post.postImage} rating={post.rating} isOwned={post.isOwned} hideGoogleMap={hideMapInComponentTree}/>
           ))}
         </div>
@@ -115,7 +118,8 @@ const Page = () => {
     
     </div>
   );
-  
+  // flex flex-column-reverse
+
 };
 
 export default Page;
