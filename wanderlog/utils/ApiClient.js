@@ -8,7 +8,7 @@ export default class ApiClient {
         this.logoutHandler = logoutHandler;
       }
     
-
+//Login
     async getLogin(username, password) {
         return await axios({
             method: "POST",
@@ -32,6 +32,7 @@ export default class ApiClient {
       });
   }
 
+//Register
   async register(username, password) {
     return await axios({
       method: "POST", 
@@ -55,6 +56,7 @@ export default class ApiClient {
   });
 }
 
+//Logout
 async logout() {
   return await axios({
     method: "POST", 
@@ -72,7 +74,7 @@ async logout() {
 })
 }
 
-
+//Authenticate
 async authUser () {
   console.log("checking for cookies")
   return await axios({
@@ -89,7 +91,7 @@ async authUser () {
   })
 }
 
-
+//Get all posts for feed
   async getAllPosts() {
     return await axios({
       method: "GET",
@@ -108,6 +110,7 @@ async authUser () {
     });
   }
 
+  //Get all posts by user
   async getUserPosts() {
     return await axios({
       method: "GET", 
@@ -127,6 +130,7 @@ async authUser () {
   
   }
 
+  //Create new post
   async createPost(postText, postLocation, postImage) {
     return await axios({
       method: "POST", 
@@ -153,6 +157,7 @@ async authUser () {
     });
   }
 
+  //update rating on post
   async updatePost(id, rating){
     return await axios({
       method: "PUT", 
@@ -175,6 +180,7 @@ async authUser () {
     });
   }
 
+  //delete post
   async deletePost(id) {
     return await axios({
       method: "DELETE",
@@ -194,6 +200,7 @@ async authUser () {
     });
   }
 
+  //get current user profile
   async getUserProfile() {
     return await axios({
       method: "GET", 
@@ -213,6 +220,7 @@ async authUser () {
   
   }
 
+  //get other user's profile
   async getOtherProfile(id) {
     return await axios({
       method: "GET", 
@@ -232,6 +240,7 @@ async authUser () {
   
   }
 
+  //edit current user profile
   async editUserProfile(imageURL, bio, userLocation) {
     return await axios ({
       method: "PUT",
@@ -254,6 +263,7 @@ async authUser () {
     })
   }
 
+  //get locations for map display
   async getMapLocations(id) {
     let reqId = null
     id ? reqId = id : reqId = null
@@ -275,6 +285,7 @@ async authUser () {
   }
 
 
+//get locations for top rated map display
   async getTopRatedLocations(id) {
     return await axios({
       method: "GET", 
