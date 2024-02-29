@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import ProfileGoogleMap from '../../components/ProfileGoogleMap';
 import NavBar from '../../components/Navbar';
 
+import { Spinner } from '@chakra-ui/react';
+
+
 import {
   EmailShareButton,
   FacebookShareButton,
