@@ -39,9 +39,9 @@ const Post = (props) => {
     setEditMode(!editMode)
   }
 
-  const updateRating = (event) => {
+  const updateRating = async (event) => {
     event.preventDefault();
-    client.updatePost(props.idValue, event.target.rating.value);
+    await client.updatePost(props.idValue, event.target.rating.value);
     setEditMode(!editMode)
     window.location.reload();
   }
@@ -76,8 +76,8 @@ const Post = (props) => {
       />
       {/* <PostGoogleMap  {lat=0, lng=0} /> */}
       </div>
-      <div className="mt-2 justify-left w-16 h-16 ml-2 border-4 border-black rounded-full overflow-hidden">
-        <img className=" object-cover object-center h-16" src={props.profilePic} alt='profile picture' />
+      <div className="mt-2 justify-left w-16 h-16 ml-2 border-4 border-white rounded-full overflow-hidden">
+        <img className="object-cover h-full w-full" src={props.profilePic} alt='profile picture' />
       </div>
       <div className="text-center mt-2 items-center">
         <h2 className="font-extralight text-base text-gray-500"><a href={`https://wanderlogfront.vercel.app/${props.name}`}>{props.name}</a></h2>
