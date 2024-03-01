@@ -74,7 +74,6 @@ const Post = (props) => {
       <PostGoogleMap  postLocation = {props.postLocation} lat={props.lat} lng={props.lng} rating={props.rating}
         hideMap={props.hideGoogleMap}
       />
-      {/* <PostGoogleMap  {lat=0, lng=0} /> */}
       </div>
       <div className="mt-2 justify-left w-16 h-16 ml-2 border-4 border-white rounded-full overflow-hidden">
         <img className="object-cover h-full w-full" src={props.profilePic} alt='profile picture' />
