@@ -81,8 +81,7 @@ const CreatePost = (props) => {
         let googleMapsResponse = []
         try {
           googleMapsResponse = await axios.get(
-            `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKeyValue}`,
-            {withCredentials: true}
+            `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKeyValue}`
           );
         } catch (error) {
           console.error(error);
