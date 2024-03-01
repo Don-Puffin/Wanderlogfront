@@ -31,7 +31,7 @@ const page = () => {
                   />
                 </span>
               </div>
-              <div className="lg:ml-4 mt-6 text-white lg:w-80 lg:text-lg md:text-md">Immerse yourself in a vibrant community where you can like, share, and comment on others' posts while exploring their profiles, maps, reviews. Explore our site, see the places you really want to visit and share your experiences to inspire others. </div>
+              <div className="lg:ml-4 mt-6 text-white lg:w-80 lg:text-lg md:text-md">Immerse yourself in a vibrant community where you can share your journeys with others and discover their profiles, maps, and reviews. Explore our site, see the places you really want to visit and share your experiences to inspire others. </div>
               {/* Buttons */}
               <div className="lg:ml-5 flex mt-2 gap-4">
                 <Link href="/login" className="border-2 border-white hover:bg-white text-white hover:text-black font-semibold mt-8 py-2 px-6 rounded">

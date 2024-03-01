@@ -19,12 +19,9 @@ const CreatePost = (props) => {
 
   let isOpen = props.isOpen
   
-  const [modalOpen, setModalOpen] = useState(isOpen)
-
     const [userLat, setUserLat] = useState (0)
     const [userLng, setUserLng] = useState (0)
     const [locationName, setLocationName] = useState ("")
-    const [placeID, setPlaceID] = useState ("")
     const [searchResult, setSearchResult] = useState("")
     
     const [imageURL, setImageURL] = useState ("/images/placeholder.png")
@@ -83,7 +80,7 @@ const CreatePost = (props) => {
     const handleLocation = async (placeId) => {    
         let googleMapsResponse = []
         try {
-          googleMapsResponse = await axios.get(
+          googleMapsResponse = await axios({withCredentials: true}).get(
             `https://maps.googleapis.com/maps/api/geocode/json?place_id=${placeId}&key=${apiKeyValue}`
           );
         } catch (error) {
@@ -97,19 +94,6 @@ const CreatePost = (props) => {
   
         };
     
-        // const hideModal = () => {
-        //   const modalElement = document.getElementById('modalHide');
-        //   if (isOpen) {
-        //     modalElement.classList.remove('hidden');
-        //   } else {
-        //     modalElement.classList.add("hidden")
-        //   }
-        // };
-        
-
-        // useEffect(() => {
-        //   hideModal();
-        // }, [])
 
   return (
    isOpen &&  (   
